@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://_placeholder.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Border.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/main.gd" type="Script" id=4]
 [ext_resource path="res://scripts/ui/Door01.gd" type="Script" id=5]

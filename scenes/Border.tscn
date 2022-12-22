@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Block.tscn" type="PackedScene" id=1]
+
+[node name="Border" type="Node2D"]
+z_index = -2
+
+[node name="BlockN" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -256 )
+scale = Vector2( 21.439, 1 )
+
+[node name="BlockE" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 0 )
+rotation = 1.5708
+scale = Vector2( 21.439, 1 )
+
+[node name="BlockS" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 256 )
+scale = Vector2( 21.439, 1 )
+
+[node name="BlockW" parent="." instance=ExtResource( 1 )]
+position = Vector2( -256, 0 )
+rotation = 1.5708
+scale = Vector2( 21.439, 1 )
+
+[node name="BlockNOut" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( -8, -456 )
+scale = Vector2( 43.463, 15.795 )
+
+[node name="BlockEOut" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 424, 8 )
+rotation = 1.5708
+scale = Vector2( 21.439, 12.802 )
+
+[node name="BlockSOut" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( -4.76837e-07, 456 )
+scale = Vector2( 42.22, 15.795 )
+
+[node name="BlockWOut" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( -424, -8 )
+rotation = 1.5708
+scale = Vector2( 21.439, 12.802 )

@@ -73,7 +73,6 @@ func _rand_shuffle_enemy_groups():
 	enemies_g1.shuffle()
 #	enemies_g2.shuffle()
 
-################################################### TIMER STUFF ###################################################
 func _on_TimerAttack_timeout():
 	Global.TimerDeathAnim.start()
 	

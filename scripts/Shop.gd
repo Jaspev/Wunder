@@ -16,7 +16,11 @@ func _ready():
 	randomize()
 	var rand_item = hp_items[randi() % hp_items.size()]
 	add_child(rand_item.instance())
+	
+	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 
 func _on_ShopExit_body_entered(body):
 	Global.stopattacktimer()
+
+func _on_TimerDeathAnim_timeout():
 	queue_free()

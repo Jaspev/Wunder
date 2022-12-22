@@ -22,15 +22,12 @@ position = Vector2( 0, -128 )
 position = Vector2( 128, -128 )
 
 [node name="ItemHP1" parent="." instance=ExtResource( 2 )]
-visible = false
 position = Vector2( -128, -128 )
 
 [node name="ItemHP2" parent="." instance=ExtResource( 1 )]
-visible = false
 position = Vector2( 0, -128 )
 
 [node name="ItemSpeed1" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 128, -128 )
 
 [node name="ShopExit" type="Area2D" parent="."]

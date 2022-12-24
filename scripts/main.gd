@@ -1,5 +1,7 @@
 extends Node2D
 
+#TESTTESTTESTTETSTESTTESTTESTTESTTESTTEST
+
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
 var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")

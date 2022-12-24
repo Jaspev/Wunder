@@ -17,6 +17,11 @@ const spawn_point_count = 6
 const radius = 10
 
 func _ready():
+	$AnimationPlayer.play("Idle")
+	
+	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
+	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
+	
 	var step = 2 * PI / spawn_point_count
 	
 	for i in range(spawn_point_count):
@@ -25,7 +30,7 @@ func _ready():
 		spawn_point.position = pos
 		spawn_point.rotation = pos.angle()
 		rotater.add_child(spawn_point)
-		
+	
 	shoot_timer.wait_time = shooter_timer_wait_time
 	shoot_timer.start()
 	
@@ -65,3 +70,12 @@ func _on_ShootTimer_timeout() -> void:
 		get_tree().root.add_child(bullet)
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation
+
+func _on_TimerAttack_timeout():
+	$Sprite.rotation_degrees = 0
+	$AnimationPlayer.queue("Death")
+	$AnimationPlayer.queue("RESET")
+
+func _on_TimerDeathAnim_timeout():
+	pass
+	#play reset animation but it's not working here ????

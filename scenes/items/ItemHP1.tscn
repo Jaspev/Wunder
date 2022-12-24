@@ -22,5 +22,3 @@ margin_right = 37.0
 margin_bottom = 71.0
 text = "1HP
 10shillings"
-
-[connection signal="body_entered" from="." to="." method="_on_ItemHP1_body_entered"]

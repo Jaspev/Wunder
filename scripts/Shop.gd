@@ -5,9 +5,10 @@ var hp1 = preload("res://scenes/items/ItemHP1.tscn")
 var hp2 = preload("res://scenes/items/ItemHP2.tscn")
 var hp_items = []
 
-var speed1 = preload("res://scenes/items/ItemSpeed1.tscn")
+var speed1 = preload("res://scenes/items/ItemPassSpeed1.tscn")
 var pass_items = []
 
+var skip_enemy = preload("res://scenes/items/ItemUseSkipEnemy.tscn")
 var use_items = []
 
 func _ready():
@@ -19,7 +20,7 @@ func _ready():
 	
 	hp_items = [hp1, hp2]
 	pass_items = [speed1]
-	use_items = []
+	use_items = [skip_enemy]
 	
 	#summon random hp item
 	var rand_hp = hp_items[randi() % hp_items.size()]
@@ -34,10 +35,10 @@ func _ready():
 	add_child(rand_pass_instanced)
 	
 	#summon random useable item
-#	var rand_use = use_items[randi() % use_items.size()]
-#	var rand_use_instanced = rand_use.instance()
-#	rand_use_instanced.position = use_pos
-#	add_child(rand_use_instanced)
+	var rand_use = use_items[randi() % use_items.size()]
+	var rand_use_instanced = rand_use.instance()
+	rand_use_instanced.position = use_pos
+	add_child(rand_use_instanced)
 	
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 

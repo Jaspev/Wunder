@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://scripts/items/ItemSpeed1.gd" type="Script" id=2]
+[ext_resource path="res://scripts/items/ItemUseSkipEnemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
 
-[node name="ItemSpeed1" type="Area2D"]
+[node name="ItemUseSkipEnemy" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -20,7 +20,5 @@ margin_left = -40.0
 margin_top = 40.0
 margin_right = 37.0
 margin_bottom = 71.0
-text = "+10000 speed
-20shillings"
-
-[connection signal="body_entered" from="." to="." method="_on_ItemSpeed1_body_entered"]
+text = "Skip Enemy
+30shillings"

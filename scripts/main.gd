@@ -1,6 +1,6 @@
 extends Node2D
 
-#TESTTESTTESTTETSTESTTESTTESTTESTTESTTEST
+#20221224
 
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")

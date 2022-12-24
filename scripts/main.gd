@@ -3,9 +3,9 @@ extends Node2D
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
 var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")
-var enemy003 = preload("res://scenes/enemies/EnemyG1003.tscn")
-var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
-var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
+#var enemy003 = preload("res://scenes/enemies/EnemyG1003.tscn")
+#var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
+#var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
 var enemies_g1 = []
 
 var boss001 = [preload("res://scenes/bosses/Boss001.tscn")]

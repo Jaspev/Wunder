@@ -1,13 +1,7 @@
 extends Node
 
 #player vars
-#reset vars
-var reset_hp = 5
-var reset_hp_cap = 5
-var reset_hp_start = 5
-var reset_speed = 10000
-var reset_walk_speed_div = 1.75
-var reset_score = 0
+var has_item = 0
 #health vars
 var health = 5
 var health_cap = 5
@@ -16,6 +10,14 @@ var health_start = 5
 var move_speed = 10000
 var walk_speed_div = 1.75
 var score = 0
+#reset vars
+var reset_hp = 5
+var reset_hp_cap = 5
+var reset_hp_start = 5
+var reset_speed = 10000
+var reset_walk_speed_div = 1.75
+var reset_score = 0
+
 
 #timer vars
 var enemy_time_duration = 10

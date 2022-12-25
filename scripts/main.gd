@@ -35,6 +35,8 @@ func _ready():
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
 	Global.TimerAttack.start()
+	
+	$AudioMusic.play()
 
 #runs every frame
 func _physics_process(delta):

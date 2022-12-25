@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://_placeholder.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://audio/enemy_death_lq.ogg" type="AudioStream" id=9]
 [ext_resource path="res://textures/doorL.png" type="Texture" id=10]
 [ext_resource path="res://textures/doorR.png" type="Texture" id=11]
+[ext_resource path="res://_placeholder.ogg" type="AudioStream" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -195,3 +196,7 @@ mix_target = 2
 [node name="AudioEnemyDeath" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 mix_target = 2
+
+[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true

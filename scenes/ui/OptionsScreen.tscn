@@ -17,28 +17,103 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 436.0
-margin_top = 439.0
-margin_right = 523.0
-margin_bottom = 521.0
+margin_left = 431.0
+margin_top = 388.0
+margin_right = 529.0
+margin_bottom = 572.0
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 87.0
+[node name="LabelOptionsTitle" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 98.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 1 )
-text = "options"
+text = "options:"
 
-[node name="ButtonFullscreen" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxFullscreen" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 margin_top = 38.0
-margin_right = 87.0
-margin_bottom = 58.0
-text = "Fullscreen"
+margin_right = 98.0
+margin_bottom = 62.0
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 62.0
-margin_right = 87.0
-margin_bottom = 82.0
+[node name="Fullscreen" type="Label" parent="CenterContainer/VBoxContainer/HBoxFullscreen"]
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 19.0
+text = "Fullscreen:"
+
+[node name="ButtonFullscreen" type="CheckBox" parent="CenterContainer/VBoxContainer/HBoxFullscreen"]
+margin_left = 74.0
+margin_right = 98.0
+margin_bottom = 24.0
+
+[node name="Audio" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 98.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 1 )
+text = "audio:"
+
+[node name="Master" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 98.0
+margin_bottom = 120.0
+
+[node name="Music" type="Label" parent="CenterContainer/VBoxContainer/Master"]
+margin_top = 1.0
+margin_right = 48.0
+margin_bottom = 15.0
+text = "Master:"
+
+[node name="MusicSlider" type="HSlider" parent="CenterContainer/VBoxContainer/Master"]
+margin_left = 52.0
+margin_right = 68.0
+margin_bottom = 16.0
+min_value = -80.0
+max_value = 0.0
+
+[node name="Music" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 98.0
+margin_bottom = 140.0
+
+[node name="Music" type="Label" parent="CenterContainer/VBoxContainer/Music"]
+margin_top = 1.0
+margin_right = 42.0
+margin_bottom = 15.0
+text = "Music:"
+
+[node name="MusicSlider" type="HSlider" parent="CenterContainer/VBoxContainer/Music"]
+margin_left = 46.0
+margin_right = 62.0
+margin_bottom = 16.0
+min_value = -80.0
+max_value = 0.0
+
+[node name="SFX" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 144.0
+margin_right = 98.0
+margin_bottom = 160.0
+
+[node name="SFX" type="Label" parent="CenterContainer/VBoxContainer/SFX"]
+margin_top = 1.0
+margin_right = 26.0
+margin_bottom = 15.0
+text = "SFX:"
+
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/VBoxContainer/SFX"]
+margin_left = 30.0
+margin_right = 46.0
+margin_bottom = 16.0
+min_value = -80.0
+max_value = 0.0
+
+[node name="HboxBack" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 164.0
+margin_right = 98.0
+margin_bottom = 184.0
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer/HboxBack"]
+margin_right = 42.0
+margin_bottom = 20.0
 text = "Back"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonFullscreen" to="." method="_on_ButtonFullscreen_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxFullscreen/ButtonFullscreen" to="." method="_on_ButtonFullscreen_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HboxBack/BackButton" to="." method="_on_BackButton_pressed"]

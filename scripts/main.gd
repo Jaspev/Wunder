@@ -5,9 +5,9 @@ extends Node2D
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
 var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")
-#var enemy003 = preload("res://scenes/enemies/EnemyG1003.tscn")
-#var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
-#var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
+var enemy_lamp = preload("res://scenes/enemies/EnemyG1Lamp.tscn")
+var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
+var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
 var enemies_g1 = []
 
 var boss001 = [preload("res://scenes/bosses/Boss001.tscn")]
@@ -20,7 +20,7 @@ var no_hit = 1
 
 #runs on scene load
 func _ready():
-	enemies_g1 = [enemy_flower] #enemy_eye, enemy003, enemy004, enemy005]
+	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
 	
 	_rand_shuffle_enemy_groups()
 	
@@ -110,6 +110,10 @@ func _on_TimerDeathAnim_timeout():
 	if timeline_id == 5:
 		Global.TimerAttack.wait_time = Global.enemy_time_duration
 		$EnemyProgress.max_value = Global.enemy_time_duration
+	
+	#on shop turn end, -10 points
+	if timeline_id == 2:
+		Global.score -= 10
 	
 	#loop timeline
 	if timeline_id == timeline.size() - 1:

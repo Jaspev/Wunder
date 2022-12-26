@@ -17,15 +17,7 @@ func _physics_process(delta):
 		move_and_slide(move_vec * ( Global.move_speed / Global.walk_speed_div ) * delta)
 	else:
 		move_and_slide(move_vec * Global.move_speed * delta)
-	
-	#if health is over health_cap var, then just = health_cap
-	if Global.health >= Global.health_cap:
-		Global.health = Global.health_cap
-		
-	#same above but for health_start
-	if Global.health_start >= Global.health_cap:
-		Global.health_start = Global.health_cap
-	
+
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Bullet") and $iframes.is_stopped():
 		Global.health -= 1

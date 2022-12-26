@@ -18,13 +18,25 @@ var reset_speed = 10000
 var reset_walk_speed_div = 1.75
 var reset_score = 0
 
-
 #timer vars
 var enemy_time_duration = 10
 var boss_time_duration = 30
 var TimerAttack = Timer.new()
 var TimerDeathAnim = Timer.new()
 var TimerPause = Timer.new()
+
+func _physics_process(delta):
+	#score min cap at 0
+	if score <= 0:
+		score = 0
+	
+	#if health is over health_cap var, then just = health_cap
+	if health >= health_cap:
+		health = health_cap
+	
+	#same above but for health_start
+	if health_start >= health_cap:
+		health_start = health_cap
 
 func _ready():
 	TimerAttack.one_shot = true

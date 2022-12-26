@@ -18,65 +18,12 @@ var timeline_id = 0
 
 var no_hit = 1
 
-#runs on scene load
-func _ready():
-	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
-	
-	_rand_shuffle_enemy_groups()
-	
-	timeline += enemies_g1
-	timeline += boss001
-	timeline += shop
-	
-	add_child(timeline[timeline_id].instance())
-	
-	#Timer stuff
-	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
-	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
-	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
-	Global.TimerAttack.start()
-	
-	$AudioMusic.play()
-
-#runs every frame
-func _physics_process(delta):
-	_debug_stuff()
-	
-	#health ui
-	$HeartUI.rect_size.y = Global.health * 64
-	#score ui
-	$ScoreUI.text = str(Global.score)
-	
-	#play player death anim then gameover screen
-	if Global.health <= 0:
-#		$TimerPlayerDeathAnim.start()
-#		get_tree().paused = true
-#		yield($TimerPlayerDeathAnim, "timeout")
-		get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
-		get_tree().call_group("Enemy", "queue_free")
-		get_tree().call_group("Bullet", "queue_free")
-	
-	#if enemy attack timer = 0, freeze enemy and projectile groups
-	if Global.TimerAttack.time_left == 0:
-		get_tree().paused = true #pause
-	
-	#bottom progress bar ui
-	$EnemyProgress.value = Global.TimerAttack.time_left
-	
-	#test if currently no hit during "timer" (current enemy)
-	if Global.health != Global.health_start and Global.TimerAttack.time_left > 0:
-		no_hit = 0
-	
-	#score min cap at 0
-	if Global.score <= 0:
-		Global.score = 0
-
-#randomize and shuffle enemy array groups
-func _rand_shuffle_enemy_groups():
+func _rand_shuffle():
 	randomize()
 	enemies_g1.shuffle()
 #	enemies_g2.shuffle()
 
+#Timer stuff
 func _on_TimerAttack_timeout():
 	Global.TimerDeathAnim.start()
 	
@@ -85,10 +32,14 @@ func _on_TimerAttack_timeout():
 	if enemies_g1.size() == 0:
 		Global.health += 5
 	
-	if no_hit == 1:
-		Global.score += 10
-	else:
+	#if someone is on a no hit run and NOT at the shop, add 5pts
+	if no_hit == 1 and ! "Shop" in str(timeline[timeline_id].instance()):
 		Global.score += 5
+
+	if "Enemy" in str(timeline[timeline_id].instance()):
+		Global.score += 5
+	if "Boss" in str(timeline[timeline_id].instance()):
+		Global.score += 10
 	
 	Global.health_start = Global.health
 	
@@ -101,20 +52,6 @@ func _on_TimerAttack_timeout():
 func _on_TimerDeathAnim_timeout():
 	Global.TimerPause.start()
 	
-	#on turn end BEFORE boss, change attack timer to boss_time_duration
-	if timeline_id == 4:
-		Global.TimerAttack.wait_time = Global.boss_time_duration
-		$EnemyProgress.max_value = Global.boss_time_duration
-		
-	#on turn end DURING boss, change attack timer to enemy_time_duration
-	if timeline_id == 5:
-		Global.TimerAttack.wait_time = Global.enemy_time_duration
-		$EnemyProgress.max_value = Global.enemy_time_duration
-	
-	#on shop turn end, -10 points
-	if timeline_id == 2:
-		Global.score -= 10
-	
 	#loop timeline
 	if timeline_id == timeline.size() - 1:
 		timeline_id = -1
@@ -124,12 +61,69 @@ func _on_TimerDeathAnim_timeout():
 	$Player.position = Vector2(0,0)
 
 func _on_TimerPause_timeout():
-	Global.TimerAttack.start()
-	
 	get_tree().paused = false #unpause
 	
 	timeline_id += 1
+	
 	add_child(timeline[timeline_id].instance()) #summon next thing in timeline
+	print(timeline_id)
+	print(timeline[timeline_id].instance())
+	
+	if "Boss" in str(timeline[timeline_id].instance()):
+		Global.TimerAttack.wait_time = Global.boss_time_duration
+		$EnemyProgress.max_value = Global.boss_time_duration
+	
+	if "Enemy" in str(timeline[timeline_id].instance()):
+		Global.TimerAttack.wait_time = Global.enemy_time_duration
+		$EnemyProgress.max_value = Global.enemy_time_duration
+	
+	Global.TimerAttack.start()
+
+func _ready():
+	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
+	
+	_rand_shuffle()
+	
+	timeline += enemies_g1
+	timeline += boss001
+	timeline += shop
+	
+	print(timeline_id)
+	print(timeline[timeline_id].instance())
+	
+	add_child(timeline[timeline_id].instance())
+	
+	#Timer stuff
+	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
+	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
+	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
+	Global.TimerAttack.start()
+	
+#	$AudioMusic.play()
+
+func _physics_process(delta):
+	_debug_stuff()
+	
+	#health ui
+	$HeartUI.rect_size.y = Global.health * 64
+	#score ui
+	$ScoreUI.text = str(Global.score)
+	#bottom timer progress bar ui
+	$EnemyProgress.value = Global.TimerAttack.time_left
+	
+	#gameover screen
+	if Global.health <= 0:
+		get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
+		get_tree().call_group("Enemy", "queue_free")
+		get_tree().call_group("Bullet", "queue_free")
+	
+	#if enemy attack timer = 0, freeze enemy and projectile groups
+	if Global.TimerAttack.time_left == 0:
+		get_tree().paused = true #pause
+	
+	#test if currently no hit during current enemy
+	if Global.health != Global.health_start and Global.TimerAttack.time_left > 0:
+		no_hit = 0
 
 ################################################### DEBUG STUFF ###################################################
 func _debug_stuff():

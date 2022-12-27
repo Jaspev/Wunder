@@ -1,7 +1,5 @@
 extends Node2D
 
-#20221224
-
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
 var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")
@@ -9,6 +7,9 @@ var enemy_lamp = preload("res://scenes/enemies/EnemyG1Lamp.tscn")
 var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
 var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
 var enemies_g1 = []
+
+var enemy_secret_1 = preload("res://scenes/enemies/EnemySecret001.tscn")
+var enemies_secret = []
 
 var boss001 = [preload("res://scenes/bosses/Boss001.tscn")]
 var shop = [preload("res://scenes/Shop.tscn")]
@@ -18,10 +19,13 @@ var timeline_id = 0
 
 var no_hit = 1
 
+var rng = RandomNumberGenerator.new()
+
 func _rand_shuffle():
 	randomize()
 	enemies_g1.shuffle()
 #	enemies_g2.shuffle()
+	enemies_secret.shuffle()
 
 #Timer stuff
 func _on_TimerAttack_timeout():
@@ -69,22 +73,28 @@ func _on_TimerPause_timeout():
 	print(timeline_id)
 	print(timeline[timeline_id].instance())
 	
-	if "Boss" in str(timeline[timeline_id].instance()):
+	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.boss_time_duration
 		$EnemyProgress.max_value = Global.boss_time_duration
 	
-	if "Enemy" in str(timeline[timeline_id].instance()):
+	if "Enemy" in str(timeline[timeline_id].instance()) or "Shop" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.enemy_time_duration
 		$EnemyProgress.max_value = Global.enemy_time_duration
 	
 	Global.TimerAttack.start()
 
 func _ready():
-	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
+	rng.randomize()
+	var secret_enemy_selector = rng.randi_range(1, 100)
+	print("secret_enemy_selector = ", secret_enemy_selector)
 	
+	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
+	enemies_secret = [enemy_secret_1]
 	_rand_shuffle()
 	
 	timeline += enemies_g1
+	if secret_enemy_selector == 1:
+		timeline += enemies_secret
 	timeline += boss001
 	timeline += shop
 	

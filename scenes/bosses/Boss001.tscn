@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/enemies/EnemyG1Flower.gd" type="Script" id=1]
 [ext_resource path="res://textures/flower.png" type="Texture" id=2]
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=3]
+[ext_resource path="res://_placeholder2.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Death"
@@ -121,6 +122,10 @@ pause_mode = 2
 anims/Death = SubResource( 1 )
 anims/Idle = SubResource( 3 )
 anims/RESET = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="tween_completed" from="tween_move_down" to="." method="_on_tween_move_down_tween_completed"]

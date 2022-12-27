@@ -63,7 +63,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[node name="Enemy003" type="Node2D" groups=["Enemy"]]
+[node name="DefaultEnemy" type="Node2D" groups=["Enemy"]]
 pause_mode = 1
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -76,3 +76,6 @@ pause_mode = 2
 anims/Death = SubResource( 3 )
 anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

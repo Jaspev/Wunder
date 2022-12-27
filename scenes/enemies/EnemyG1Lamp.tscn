@@ -76,3 +76,6 @@ pause_mode = 2
 anims/Death = SubResource( 3 )
 anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

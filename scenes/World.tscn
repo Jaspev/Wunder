@@ -6,7 +6,7 @@
 [ext_resource path="res://scripts/main.gd" type="Script" id=4]
 [ext_resource path="res://scripts/ui/Door01.gd" type="Script" id=5]
 [ext_resource path="res://scripts/ui/Door02.gd" type="Script" id=6]
-[ext_resource path="res://fonts/Pragmatica-ExtraLight.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://fonts/jpix5.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://audio/door_close_open_lq.ogg" type="AudioStream" id=8]
 [ext_resource path="res://audio/enemy_death_lq.ogg" type="AudioStream" id=9]
 [ext_resource path="res://textures/doorL.png" type="Texture" id=10]
@@ -149,11 +149,11 @@ stretch_mode = 2
 [node name="ScoreUI" type="Label" parent="."]
 pause_mode = 2
 margin_left = 280.0
-margin_top = -280.0
+margin_top = -272.0
 margin_right = 462.0
 margin_bottom = -194.0
 custom_fonts/font = SubResource( 3 )
-text = "Score"
+text = "SCORE"
 
 [node name="Door01" type="Sprite" parent="."]
 pause_mode = 2

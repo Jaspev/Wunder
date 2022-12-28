@@ -5,10 +5,8 @@ func _ready():
 
 func _process(delta):
 	if $VBoxContainer/LabelStart/ButtonStart.has_focus():
-		$Selector.position = Vector2(600, 94)
-	
+		$Selector.position = $Position2DStart.position
 	if $VBoxContainer/LabelOptions/ButtonOptions.has_focus():
-		$Selector.position = Vector2(819, 186)
-	
+		$Selector.position = $Position2DOptions.position
 	if $VBoxContainer/LabelQuit/ButtonQuit.has_focus():
-		$Selector.position = Vector2(484, 286)
+		$Selector.position = $Position2DQuit.position

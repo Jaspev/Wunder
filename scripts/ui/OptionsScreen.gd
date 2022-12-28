@@ -1,7 +1,19 @@
 extends Control
 
 func _ready():
-	$AudioStreamPlayer.play()
+	$BackButton.grab_focus()
+
+func _process(delta):
+	if $GridContainer/ButtonFullscreen.has_focus():
+		$Selector.position = $Position2DFullscreen.position
+	if $GridContainer/SliderMaster.has_focus():
+		$Selector.position = $Position2DMaster.position
+	if $GridContainer/SliderMusic.has_focus():
+		$Selector.position = $Position2DMusic.position
+	if $GridContainer/SliderSFX.has_focus():
+		$Selector.position = $Position2DSFX.position
+	if $BackButton.has_focus():
+		$Selector.position = $Position2DBack.position
 
 func _on_ButtonFullscreen_pressed():
 	OS.window_fullscreen = !OS.window_fullscreen

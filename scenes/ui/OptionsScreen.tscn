@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://fonts/jpix5.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/ui/OptionsScreen.gd" type="Script" id=2]
@@ -13,6 +13,24 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=18]
+gradient = SubResource( 17 )
+width = 32
+height = 32
+
+[sub_resource type="Gradient" id=19]
+colors = PoolColorArray( 0.168627, 0.168627, 0.168627, 1, 0.168627, 0.168627, 0.168627, 1 )
+
+[sub_resource type="GradientTexture2D" id=20]
+gradient = SubResource( 19 )
+width = 32
+height = 32
+
+[sub_resource type="StyleBoxEmpty" id=22]
 
 [sub_resource type="StyleBoxEmpty" id=16]
 
@@ -44,10 +62,33 @@ font_data = ExtResource( 1 )
 size = 32
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxEmpty" id=21]
+
 [node name="OptionsScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
+
+[node name="Selector" type="Sprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+z_index = 277
+texture = ExtResource( 5 )
+
+[node name="Position2DFullscreen" type="Position2D" parent="."]
+position = Vector2( 514, 196 )
+
+[node name="Position2DMaster" type="Position2D" parent="."]
+position = Vector2( 920, 230 )
+
+[node name="Position2DMusic" type="Position2D" parent="."]
+position = Vector2( 920, 266 )
+
+[node name="Position2DSFX" type="Position2D" parent="."]
+position = Vector2( 920, 303 )
+
+[node name="Position2DBack" type="Position2D" parent="."]
+position = Vector2( 392, 864 )
 
 [node name="LabelOptionsTitle" type="Label" parent="."]
 margin_left = 65.0
@@ -76,8 +117,11 @@ valign = 1
 margin_left = 397.0
 margin_right = 829.0
 margin_bottom = 32.0
-custom_icons/checked = ExtResource( 5 )
-custom_icons/unchecked = ExtResource( 5 )
+focus_neighbour_top = NodePath("../../BackButton")
+focus_neighbour_bottom = NodePath("../SliderMaster")
+custom_icons/checked = SubResource( 18 )
+custom_icons/unchecked = SubResource( 20 )
+custom_styles/focus = SubResource( 22 )
 custom_styles/normal = SubResource( 16 )
 button_mask = 0
 align = 1
@@ -96,6 +140,8 @@ margin_top = 36.0
 margin_right = 829.459
 margin_bottom = 68.116
 rect_min_size = Vector2( 432.459, 32.116 )
+focus_neighbour_top = NodePath("../ButtonFullscreen")
+focus_neighbour_bottom = NodePath("../SliderMusic")
 custom_icons/grabber_highlight = SubResource( 12 )
 custom_icons/grabber = SubResource( 13 )
 custom_styles/slider = SubResource( 11 )
@@ -117,6 +163,8 @@ margin_top = 72.0
 margin_right = 829.459
 margin_bottom = 104.116
 rect_min_size = Vector2( 432.459, 32.116 )
+focus_neighbour_top = NodePath("../SliderMaster")
+focus_neighbour_bottom = NodePath("../SliderSFX")
 custom_icons/grabber_highlight = SubResource( 12 )
 custom_icons/grabber = SubResource( 13 )
 custom_styles/slider = SubResource( 11 )
@@ -138,6 +186,8 @@ margin_top = 108.0
 margin_right = 829.459
 margin_bottom = 140.116
 rect_min_size = Vector2( 432.459, 32.116 )
+focus_neighbour_top = NodePath("../SliderMusic")
+focus_neighbour_bottom = NodePath("../../BackButton")
 custom_icons/grabber_highlight = SubResource( 12 )
 custom_icons/grabber = SubResource( 13 )
 custom_styles/slider = SubResource( 11 )
@@ -151,12 +201,15 @@ margin_left = 56.0
 margin_top = 832.0
 margin_right = 376.0
 margin_bottom = 902.0
+focus_neighbour_top = NodePath("../GridContainer/SliderSFX")
+focus_neighbour_bottom = NodePath("../GridContainer/ButtonFullscreen")
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 3 )
+custom_styles/focus = SubResource( 21 )
 text = "BACK"
 flat = true
 

@@ -30,31 +30,32 @@ z_index = 277
 texture = ExtResource( 6 )
 
 [node name="Position2DStart" type="Position2D" parent="."]
-position = Vector2( 466, 233 )
+position = Vector2( 466, 243 )
 
 [node name="Position2DOptions" type="Position2D" parent="."]
-position = Vector2( 629, 306 )
+position = Vector2( 629, 316 )
 
 [node name="Position2DQuit" type="Position2D" parent="."]
-position = Vector2( 384, 384 )
+position = Vector2( 384, 394 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="LabelTitle" type="Label" parent="."]
 margin_left = 65.0
 margin_top = 65.0
+margin_right = 911.0
+margin_bottom = 193.0
+custom_fonts/font = SubResource( 2 )
+text = "WUNDER"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 58.0
+margin_top = 209.0
 margin_right = 65.0
 margin_bottom = 65.0
 mouse_filter = 2
 
-[node name="LabelTitle" type="Label" parent="VBoxContainer"]
-margin_right = 846.0
-margin_bottom = 128.0
-custom_fonts/font = SubResource( 2 )
-text = "WUNDER"
-
 [node name="ButtonStart" type="Button" parent="VBoxContainer"]
-margin_top = 132.0
-margin_right = 846.0
-margin_bottom = 202.0
+margin_right = 551.0
+margin_bottom = 70.0
 focus_neighbour_top = NodePath("../ButtonQuit")
 focus_neighbour_bottom = NodePath("../ButtonOptions")
 mouse_filter = 2
@@ -73,9 +74,9 @@ align = 0
 script = ExtResource( 1 )
 
 [node name="ButtonOptions" type="Button" parent="VBoxContainer"]
-margin_top = 206.0
-margin_right = 846.0
-margin_bottom = 276.0
+margin_top = 74.0
+margin_right = 551.0
+margin_bottom = 144.0
 focus_neighbour_top = NodePath("../ButtonStart")
 focus_neighbour_bottom = NodePath("../ButtonQuit")
 mouse_filter = 2
@@ -94,9 +95,9 @@ align = 0
 script = ExtResource( 2 )
 
 [node name="ButtonQuit" type="Button" parent="VBoxContainer"]
-margin_top = 280.0
-margin_right = 846.0
-margin_bottom = 350.0
+margin_top = 148.0
+margin_right = 551.0
+margin_bottom = 218.0
 focus_neighbour_top = NodePath("../ButtonOptions")
 focus_neighbour_bottom = NodePath("../ButtonStart")
 mouse_filter = 2

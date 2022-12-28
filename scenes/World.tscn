@@ -28,11 +28,10 @@ pause_mode = 2
 script = ExtResource( 4 )
 
 [node name="debuginfo" type="VBoxContainer" parent="."]
-visible = false
 margin_left = -472.0
-margin_top = 280.0
+margin_top = 264.0
 margin_right = -313.0
-margin_bottom = 474.0
+margin_bottom = 492.0
 
 [node name="LFPS" type="Label" parent="debuginfo"]
 pause_mode = 2

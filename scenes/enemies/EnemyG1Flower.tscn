@@ -119,6 +119,7 @@ anims/RESET = SubResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
+bus = "Music"
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="tween_completed" from="tween_move_down" to="." method="_on_tween_move_down_tween_completed"]

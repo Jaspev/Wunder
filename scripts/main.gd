@@ -88,7 +88,7 @@ func _ready():
 	var secret_enemy_selector = rng.randi_range(1, 100)
 	print("secret_enemy_selector = ", secret_enemy_selector)
 	
-	enemies_g1 = [enemy_flower] #, enemy_eye, enemy_lamp, enemy004, enemy005]
+	enemies_g1 = [enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
 	enemies_secret = [enemy_secret_1]
 	_rand_shuffle()
 	

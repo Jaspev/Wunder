@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://scripts/enemies/EnemyG1005.gd" type="Script" id=1]
 [ext_resource path="res://_placeholder.png" type="Texture" id=2]
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=3]
 
@@ -63,8 +64,9 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[node name="Enemy003" type="Node2D" groups=["Enemy"]]
+[node name="EnemyG1003" type="Node2D" groups=["Enemy"]]
 pause_mode = 1
+script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 3 )
@@ -79,3 +81,11 @@ anims/RESET = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = "Music"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -35.0
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 54.0
+text = "Enemy 005"

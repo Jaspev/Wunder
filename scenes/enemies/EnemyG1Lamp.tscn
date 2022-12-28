@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://textures/magiclampenemy (2).png" type="Texture" id=1]
+[ext_resource path="res://scripts/enemies/EnemyG1Lamp.gd" type="Script" id=2]
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=3]
 
 [sub_resource type="Animation" id=3]
@@ -63,13 +64,14 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[node name="Enemy003" type="Node2D" groups=["Enemy"]]
+[node name="EnemyG1Lamp" type="Node2D" groups=["Enemy"]]
 pause_mode = 1
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 3 )
 scale = Vector2( 1.01563, 1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 pause_mode = 2
@@ -79,3 +81,4 @@ anims/RESET = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = "Music"

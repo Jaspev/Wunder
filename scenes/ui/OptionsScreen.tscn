@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://fonts/Pragmatica-ExtraLight.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scripts/ui/ButtonReturnToTitle.gd" type="Script" id=2]
+[ext_resource path="res://fonts/jpix5.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/ui/OptionsScreen.gd" type="Script" id=2]
+[ext_resource path="res://fonts/jpix5.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/jpix10.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://textures/selector.png" type="Texture" id=5]
 
-[sub_resource type="DynamicFont" id=1]
-size = 27
+[sub_resource type="DynamicFont" id=2]
+size = 109
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="ImageTexture" id=12]
+
+[sub_resource type="ImageTexture" id=13]
+
+[sub_resource type="StyleBoxLine" id=11]
+color = Color( 0.168627, 0.168627, 0.168627, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id=10]
+color = Color( 1, 1, 1, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id=9]
+color = Color( 1, 1, 1, 1 )
+thickness = 10
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
 font_data = ExtResource( 1 )
 
 [node name="OptionsScreen" type="Control"]
@@ -12,104 +49,119 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="LabelOptionsTitle" type="Label" parent="."]
+margin_left = 65.0
+margin_top = 65.0
+margin_right = 905.0
+margin_bottom = 174.0
+custom_fonts/font = SubResource( 2 )
+text = "OPTIONS"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 431.0
-margin_top = 420.0
-margin_right = 529.0
-margin_bottom = 540.0
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 65.0
+margin_top = 180.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 2
 
-[node name="LabelOptionsTitle" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 98.0
-margin_bottom = 2.0
-custom_fonts/font = SubResource( 1 )
-text = "options:"
-
-[node name="HBoxFullscreen" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 6.0
-margin_right = 98.0
-margin_bottom = 30.0
-
-[node name="Fullscreen" type="Label" parent="CenterContainer/VBoxContainer/HBoxFullscreen"]
-margin_top = 5.0
-margin_right = 70.0
-margin_bottom = 19.0
+[node name="Fullscreen" type="Label" parent="GridContainer"]
+margin_right = 393.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 5 )
 text = "Fullscreen:"
+align = 1
+valign = 1
 
-[node name="ButtonFullscreen" type="CheckBox" parent="CenterContainer/VBoxContainer/HBoxFullscreen"]
-margin_left = 74.0
-margin_right = 98.0
-margin_bottom = 24.0
+[node name="ButtonFullscreen" type="CheckBox" parent="GridContainer"]
+margin_left = 397.0
+margin_right = 829.0
+margin_bottom = 32.0
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/normal = SubResource( 16 )
+button_mask = 0
+align = 1
 
-[node name="Audio" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 98.0
-margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
-text = "audio:"
-
-[node name="Master" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 40.0
-margin_right = 98.0
-margin_bottom = 56.0
-
-[node name="Music" type="Label" parent="CenterContainer/VBoxContainer/Master"]
-margin_top = 1.0
-margin_right = 48.0
-margin_bottom = 15.0
+[node name="Master" type="Label" parent="GridContainer"]
+margin_top = 36.0
+margin_right = 393.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 4 )
 text = "Master:"
+valign = 1
 
-[node name="MusicSlider" type="HSlider" parent="CenterContainer/VBoxContainer/Master"]
-margin_left = 52.0
-margin_right = 68.0
-margin_bottom = 16.0
+[node name="SliderMaster" type="HSlider" parent="GridContainer"]
+margin_left = 397.0
+margin_top = 36.0
+margin_right = 829.459
+margin_bottom = 68.116
+rect_min_size = Vector2( 432.459, 32.116 )
+custom_icons/grabber_highlight = SubResource( 12 )
+custom_icons/grabber = SubResource( 13 )
+custom_styles/slider = SubResource( 11 )
+custom_styles/grabber_area_highlight = SubResource( 10 )
+custom_styles/grabber_area = SubResource( 9 )
 min_value = -80.0
 max_value = 0.0
 
-[node name="Music" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 98.0
-margin_bottom = 76.0
-
-[node name="Music" type="Label" parent="CenterContainer/VBoxContainer/Music"]
-margin_top = 1.0
-margin_right = 42.0
-margin_bottom = 15.0
+[node name="Music" type="Label" parent="GridContainer"]
+margin_top = 72.0
+margin_right = 393.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 6 )
 text = "Music:"
 
-[node name="MusicSlider" type="HSlider" parent="CenterContainer/VBoxContainer/Music"]
-margin_left = 46.0
-margin_right = 62.0
-margin_bottom = 16.0
+[node name="SliderMusic" type="HSlider" parent="GridContainer"]
+margin_left = 397.0
+margin_top = 72.0
+margin_right = 829.459
+margin_bottom = 104.116
+rect_min_size = Vector2( 432.459, 32.116 )
+custom_icons/grabber_highlight = SubResource( 12 )
+custom_icons/grabber = SubResource( 13 )
+custom_styles/slider = SubResource( 11 )
+custom_styles/grabber_area_highlight = SubResource( 10 )
+custom_styles/grabber_area = SubResource( 9 )
 min_value = -80.0
 max_value = 0.0
 
-[node name="SFX" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 80.0
-margin_right = 98.0
-margin_bottom = 96.0
-
-[node name="SFX" type="Label" parent="CenterContainer/VBoxContainer/SFX"]
-margin_top = 1.0
-margin_right = 26.0
-margin_bottom = 15.0
+[node name="SFX" type="Label" parent="GridContainer"]
+margin_top = 108.0
+margin_right = 393.0
+margin_bottom = 140.0
+custom_fonts/font = SubResource( 7 )
 text = "SFX:"
 
-[node name="SFXSlider" type="HSlider" parent="CenterContainer/VBoxContainer/SFX"]
-margin_left = 30.0
-margin_right = 46.0
-margin_bottom = 16.0
+[node name="SliderSFX" type="HSlider" parent="GridContainer"]
+margin_left = 397.0
+margin_top = 108.0
+margin_right = 829.459
+margin_bottom = 140.116
+rect_min_size = Vector2( 432.459, 32.116 )
+custom_icons/grabber_highlight = SubResource( 12 )
+custom_icons/grabber = SubResource( 13 )
+custom_styles/slider = SubResource( 11 )
+custom_styles/grabber_area_highlight = SubResource( 10 )
+custom_styles/grabber_area = SubResource( 9 )
 min_value = -80.0
 max_value = 0.0
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 98.0
-margin_bottom = 120.0
-text = "Back"
+[node name="BackButton" type="Button" parent="."]
+margin_left = 56.0
+margin_top = 832.0
+margin_right = 376.0
+margin_bottom = 902.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "BACK"
+flat = true
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxFullscreen/ButtonFullscreen" to="." method="_on_ButtonFullscreen_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="GridContainer/ButtonFullscreen" to="." method="_on_ButtonFullscreen_pressed"]
+[connection signal="value_changed" from="GridContainer/SliderMaster" to="." method="_on_SliderMaster_value_changed"]
+[connection signal="value_changed" from="GridContainer/SliderMusic" to="." method="_on_SliderMusic_value_changed"]
+[connection signal="value_changed" from="GridContainer/SliderSFX" to="." method="_on_SliderSFX_value_changed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

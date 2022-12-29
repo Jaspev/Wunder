@@ -13,6 +13,31 @@ func _ready():
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
 
+#on main menu start button press
+func _on_ButtonStart_pressed():
+	#left door close tween
+	tween_ldoor_close.interpolate_property(
+		$DoorLeft,
+		"position",
+		ldoor_open,
+		ldoor_closed,
+		2,
+		Tween.TRANS_BOUNCE,
+		Tween.EASE_OUT
+	)
+	#right door close tween
+	tween_rdoor_close.interpolate_property(
+		$DoorRight,
+		"position",
+		rdoor_open,
+		rdoor_closed,
+		2,
+		Tween.TRANS_BOUNCE,
+		Tween.EASE_OUT
+	)
+	tween_ldoor_close.start()
+	tween_rdoor_close.start()
+
 #on attack timer timeout, close doors.
 func _on_TimerAttack_timeout():
 	#left door close tween
@@ -44,8 +69,8 @@ func _on_TimerPause_timeout():
 	tween_ldoor_open.interpolate_property(
 		$DoorLeft,
 		"position",
-		rdoor_closed,
-		rdoor_open,
+		ldoor_closed,
+		ldoor_open,
 		2,
 		Tween.TRANS_QUINT,
 		Tween.EASE_OUT
@@ -54,8 +79,8 @@ func _on_TimerPause_timeout():
 	tween_rdoor_open.interpolate_property(
 		$DoorRight,
 		"position",
-		ldoor_closed,
-		ldoor_open,
+		rdoor_closed,
+		rdoor_open,
 		2,
 		Tween.TRANS_QUINT,
 		Tween.EASE_OUT

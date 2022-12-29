@@ -21,6 +21,7 @@ var reset_score = 0
 #timer vars
 var enemy_time_duration = 10
 var boss_time_duration = 30
+var pause_time_duration = 1
 var TimerAttack = Timer.new()
 var TimerDeathAnim = Timer.new()
 var TimerPause = Timer.new()
@@ -50,7 +51,7 @@ func _ready():
 	add_child(TimerDeathAnim)
 	
 	TimerPause.one_shot = true
-	TimerPause.wait_time = 1
+	TimerPause.wait_time = pause_time_duration
 	TimerPause.pause_mode = 3
 	add_child(TimerPause)
 

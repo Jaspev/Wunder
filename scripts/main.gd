@@ -27,70 +27,12 @@ func _rand_shuffle():
 #	enemies_g2.shuffle()
 	enemies_secret.shuffle()
 
-#Timer stuff
-func _on_TimerAttack_timeout():
-	Global.TimerDeathAnim.start()
-	
-	Global.TimerAttack.wait_time = Global.enemy_time_duration
-	
-	if enemies_g1.size() == 0:
-		Global.health += 5
-	
-	#if someone is on a no hit run and NOT at the shop, add 5pts
-	if no_hit == 1 and ! "Shop" in str(timeline[timeline_id].instance()):
-		Global.score += 5
-
-	if "Enemy" in str(timeline[timeline_id].instance()):
-		Global.score += 5
-	if "Boss" in str(timeline[timeline_id].instance()):
-		Global.score += 10
-	
-	Global.health_start = Global.health
-	
-	no_hit = 1
-	
-	#audio
-	$AudioDoorClose.play()
-	$AudioEnemyDeath.play()
-
-func _on_TimerDeathAnim_timeout():
-	Global.TimerPause.start()
-	
-	#loop timeline
-	if timeline_id == timeline.size() - 1:
-		timeline_id = -1
-	
-	get_tree().call_group("Enemy", "queue_free")
-	get_tree().call_group("Bullet", "queue_free")
-	$Player.position = Vector2(0,0)
-
-func _on_TimerPause_timeout():
-	get_tree().paused = false #unpause
-	
-	timeline_id += 1
-	
-	add_child(timeline[timeline_id].instance()) #summon next thing in timeline
-	print(timeline_id)
-	print(timeline[timeline_id].instance())
-	
-	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
-		Global.TimerAttack.wait_time = Global.boss_time_duration
-		$EnemyProgress.max_value = Global.boss_time_duration
-	
-	if "Enemy" in str(timeline[timeline_id].instance()) or "Shop" in str(timeline[timeline_id].instance()):
-		Global.TimerAttack.wait_time = Global.enemy_time_duration
-		$EnemyProgress.max_value = Global.enemy_time_duration
-	
-	Global.TimerAttack.start()
-
 func _ready():
-	rng.randomize()
-	var secret_enemy_selector = rng.randi_range(1, 100)
-	print("secret_enemy_selector = ", secret_enemy_selector)
-	
 	enemies_g1 = [enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
 	enemies_secret = [enemy_secret_1]
 	_rand_shuffle()
+	rng.randomize()
+	var secret_enemy_selector = rng.randi_range(1, 100)
 	
 	timeline += enemies_g1
 	if secret_enemy_selector == 1:
@@ -98,16 +40,13 @@ func _ready():
 	timeline += boss001
 	timeline += shop
 	
-	print(timeline_id)
-	print(timeline[timeline_id].instance())
-	
-	add_child(timeline[timeline_id].instance())
+#	add_child(timeline[timeline_id].instance())
 	
 	#Timer stuff
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
-	Global.TimerAttack.start()
+	Global.TimerPause.start()
 	
 #	$AudioMusic.play()
 
@@ -129,11 +68,62 @@ func _physics_process(delta):
 	
 	#if enemy attack timer = 0, freeze enemy and projectile groups
 	if Global.TimerAttack.time_left == 0:
-		get_tree().paused = true #pause
+		get_tree().paused = true
+	else:
+		get_tree().paused = false
 	
 	#test if currently no hit during current enemy
 	if Global.health != Global.health_start and Global.TimerAttack.time_left > 0:
 		no_hit = 0
+
+func _on_TimerAttack_timeout():
+	Global.TimerDeathAnim.start()
+	
+	Global.TimerAttack.wait_time = Global.enemy_time_duration
+	
+	Global.health_start = Global.health
+	
+	#nohit bonus (if you no hit normal enemy, +5. If you no hit boss, +15)
+	if no_hit == 1 and "Enemy" in str(timeline[timeline_id].instance()):
+		Global.score += 5
+	if no_hit == 1 and "Boss" in str(timeline[timeline_id].instance()):
+		Global.score += 15
+	#no matter what, player gets 2 point per enemy/boss clear
+	if "Enemy" in str(timeline[timeline_id].instance()) or "Boss" in str(timeline[timeline_id].instance()):
+		Global.score += 2
+	
+	timeline_id += 1
+	
+	#loop timeline
+	if timeline_id == timeline.size():
+		timeline_id = 0
+	
+	#audio
+	$AudioDoorClose.play()
+	$AudioEnemyDeath.play()
+
+func _on_TimerDeathAnim_timeout():
+	Global.TimerPause.start()
+	
+	#reset everything for next enemy
+	get_tree().call_group("Enemy", "queue_free")
+	get_tree().call_group("Bullet", "queue_free")
+	$Player.position = Vector2(0,0)
+
+func _on_TimerPause_timeout():
+	add_child(timeline[timeline_id].instance()) #summon next thing in timeline
+	
+	no_hit = 1
+	
+	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
+		Global.TimerAttack.wait_time = Global.boss_time_duration
+		$EnemyProgress.max_value = Global.boss_time_duration
+	
+	if "Enemy" in str(timeline[timeline_id].instance()) or "Shop" in str(timeline[timeline_id].instance()):
+		Global.TimerAttack.wait_time = Global.enemy_time_duration
+		$EnemyProgress.max_value = Global.enemy_time_duration
+	
+	Global.TimerAttack.start()
 
 ################################################### DEBUG STUFF ###################################################
 func _debug_stuff():
@@ -152,6 +142,7 @@ func _debug_stuff():
 
 	#Labels
 	$debuginfo/LFPS.text = str("FPS = ", Engine.get_frames_per_second())
+	$debuginfo/LHasItem.text = str("has item? = ", Global.has_item)
 	$debuginfo/LHPStart.text = str("HP start = ", Global.health_start)
 	$debuginfo/LHP.text = str("HP = ", Global.health)
 	$debuginfo/LScore.text = str("score = ", Global.score)

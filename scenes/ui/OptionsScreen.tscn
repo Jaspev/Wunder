@@ -76,16 +76,16 @@ z_index = 277
 texture = ExtResource( 5 )
 
 [node name="Position2DFullscreen" type="Position2D" parent="."]
-position = Vector2( 514, 196 )
+position = Vector2( 514, 210 )
 
 [node name="Position2DMaster" type="Position2D" parent="."]
-position = Vector2( 920, 230 )
+position = Vector2( 920, 244 )
 
 [node name="Position2DMusic" type="Position2D" parent="."]
-position = Vector2( 920, 266 )
+position = Vector2( 920, 280 )
 
 [node name="Position2DSFX" type="Position2D" parent="."]
-position = Vector2( 920, 303 )
+position = Vector2( 920, 317 )
 
 [node name="Position2DBack" type="Position2D" parent="."]
 position = Vector2( 392, 864 )
@@ -100,7 +100,7 @@ text = "OPTIONS"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 margin_left = 65.0
-margin_top = 180.0
+margin_top = 194.0
 margin_right = 64.0
 margin_bottom = 64.0
 columns = 2

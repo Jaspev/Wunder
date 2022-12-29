@@ -122,6 +122,9 @@ margin_right = 159.0
 margin_bottom = 230.0
 text = "LTimelineID"
 
+[node name="UsableItemPos" type="Position2D" parent="."]
+position = Vector2( 320, 232 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
 current = true

@@ -142,7 +142,7 @@ func _debug_stuff():
 
 	#Labels
 	$debuginfo/LFPS.text = str("FPS = ", Engine.get_frames_per_second())
-	$debuginfo/LHasItem.text = str("has item? = ", Global.has_item)
+	$debuginfo/LHasItem.text = str("has item = ", Global.has_item)
 	$debuginfo/LHPStart.text = str("HP start = ", Global.health_start)
 	$debuginfo/LHP.text = str("HP = ", Global.health)
 	$debuginfo/LScore.text = str("score = ", Global.score)

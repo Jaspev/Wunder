@@ -15,6 +15,8 @@ func _ready():
 
 #on main menu start button press
 func _on_ButtonStart_pressed():
+	get_tree().paused = true
+	
 	#left door close tween
 	tween_ldoor_close.interpolate_property(
 		$DoorLeft,

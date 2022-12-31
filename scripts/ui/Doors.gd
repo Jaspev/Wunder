@@ -4,9 +4,9 @@ onready var tween_ldoor_close = $DoorLeft/tween_ldoor_close
 onready var tween_ldoor_open = $DoorLeft/tween_ldoor_open
 onready var tween_rdoor_close = $DoorRight/tween_rdoor_close
 onready var tween_rdoor_open = $DoorRight/tween_rdoor_open
-var ldoor_open = Vector2(-1184, 0)
+var ldoor_open = Vector2(-1185, 0)
 var ldoor_closed = Vector2(-704, 0)
-var rdoor_open = Vector2(1184, 0)
+var rdoor_open = Vector2(1185, 0)
 var rdoor_closed = Vector2(704, 0)
 
 func _ready():

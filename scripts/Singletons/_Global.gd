@@ -1,8 +1,6 @@
 extends Node
 
 #player vars
-var has_item = 0
-var current_item_id = 0
 #health vars
 var health = 5
 var health_cap = 5
@@ -27,6 +25,31 @@ var pause_time_duration = 1
 var TimerAttack = Timer.new()
 var TimerDeathAnim = Timer.new()
 var TimerPause = Timer.new()
+var current_item_sprite = Sprite.new()
+
+#item vars @_@
+var has_item = 0
+var current_item_id = 0
+var skip_tex = preload("res://textures/test.png")
+
+func _ready():
+	add_child(current_item_sprite)
+	current_item_sprite.position = Vector2(320, 232)
+	
+	TimerAttack.one_shot = true
+	TimerAttack.wait_time = enemy_time_duration
+	TimerAttack.pause_mode = 3
+	add_child(TimerAttack)
+	
+	TimerDeathAnim.one_shot = true
+	TimerDeathAnim.wait_time = enemy_death_time_duration
+	TimerDeathAnim.pause_mode = 3
+	add_child(TimerDeathAnim)
+	
+	TimerPause.one_shot = true
+	TimerPause.wait_time = pause_time_duration
+	TimerPause.pause_mode = 3
+	add_child(TimerPause)
 
 func _physics_process(delta):
 	#score min cap at 0
@@ -42,26 +65,14 @@ func _physics_process(delta):
 		health_start = health_cap
 	
 	#Item stuff
-	if Input.is_action_just_pressed("use_item") and current_item_id == 1 and !TimerAttack.is_stopped():
-		stopattacktimer()
-		has_item = 0
-		current_item_id = 0
-
-func _ready():
-	TimerAttack.one_shot = true
-	TimerAttack.wait_time = enemy_time_duration
-	TimerAttack.pause_mode = 3
-	add_child(TimerAttack)
-	
-	TimerDeathAnim.one_shot = true
-	TimerDeathAnim.wait_time = enemy_death_time_duration
-	TimerDeathAnim.pause_mode = 3
-	add_child(TimerDeathAnim)
-	
-	TimerPause.one_shot = true
-	TimerPause.wait_time = pause_time_duration
-	TimerPause.pause_mode = 3
-	add_child(TimerPause)
+	#ITEM ID 1: SKIP ENEMY
+	if current_item_id == 1:
+		current_item_sprite.set_texture(skip_tex)
+		if Input.is_action_just_pressed("use_item") and !TimerAttack.is_stopped():
+			stopattacktimer()
+			has_item = 0
+			current_item_id = 0
+			current_item_sprite.queue_free()
 
 func stopattacktimer():
 	TimerAttack.stop()

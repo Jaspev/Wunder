@@ -2,6 +2,7 @@ extends Node
 
 #player vars
 var has_item = 0
+var current_item_id = 0
 #health vars
 var health = 5
 var health_cap = 5
@@ -39,6 +40,12 @@ func _physics_process(delta):
 	#same above but for health_start
 	if health_start >= health_cap:
 		health_start = health_cap
+	
+	#Item stuff
+	if Input.is_action_just_pressed("use_item") and current_item_id == 1 and !TimerAttack.is_stopped():
+		stopattacktimer()
+		has_item = 0
+		current_item_id = 0
 
 func _ready():
 	TimerAttack.one_shot = true

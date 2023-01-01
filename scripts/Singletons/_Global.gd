@@ -25,6 +25,7 @@ var pause_time_duration = 1
 var TimerAttack = Timer.new()
 var TimerDeathAnim = Timer.new()
 var TimerPause = Timer.new()
+var TimerPlayerDeathAnim = Timer.new()
 var current_item_sprite = Sprite.new()
 
 #item vars @_@
@@ -50,6 +51,11 @@ func _ready():
 	TimerPause.wait_time = pause_time_duration
 	TimerPause.pause_mode = 3
 	add_child(TimerPause)
+	
+	TimerPlayerDeathAnim.one_shot = true
+	TimerPlayerDeathAnim.wait_time = 2
+	TimerPlayerDeathAnim.pause_mode = 3
+	add_child(TimerPlayerDeathAnim)
 
 func _physics_process(delta):
 	#score min cap at 0
@@ -63,7 +69,8 @@ func _physics_process(delta):
 	#same above but for health_start
 	if health_start >= health_cap:
 		health_start = health_cap
-	
+
+func _input(event):
 	#Item stuff
 	#ITEM ID 1: SKIP ENEMY
 	if current_item_id == 1:

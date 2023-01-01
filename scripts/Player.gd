@@ -22,7 +22,14 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("Bullet") and $iframes.is_stopped():
 		Global.health -= 1
 		$iframes.start()
-		$animation_damage.queue("flash")
+		$AnimationPlayer.queue("flash")
+	
+	if Global.health <= 0 and Global.TimerPlayerDeathAnim.is_stopped():
+		$AudioPlayerDeath.play()
+		$AnimationPlayer.play("Death")
+		Global.TimerPlayerDeathAnim.start()
+		Global.TimerAttack.stop()
+		get_tree().paused = true
 
 func _on_iframes_timeout():
-	$animation_damage.play("RESET")
+	$AnimationPlayer.play("RESET")

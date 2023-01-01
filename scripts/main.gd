@@ -46,6 +46,7 @@ func _ready():
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
+	Global.TimerPlayerDeathAnim.connect("timeout", self, "_on_TimerPlayerDeathAnim_timeout")
 	Global.TimerPause.start()
 	
 #	$AudioMusic.play()
@@ -59,12 +60,6 @@ func _physics_process(delta):
 	$ScoreUI.text = str(Global.score)
 	#bottom timer progress bar ui
 	$EnemyProgress.value = Global.TimerAttack.time_left
-	
-	#gameover screen
-	if Global.health <= 0:
-		get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
-		get_tree().call_group("Enemy", "queue_free")
-		get_tree().call_group("Bullet", "queue_free")
 	
 	#if enemy attack timer = 0, freeze enemy and projectile groups
 	if Global.TimerAttack.time_left == 0:
@@ -125,6 +120,11 @@ func _on_TimerPause_timeout():
 	
 	Global.TimerAttack.start()
 
+func _on_TimerPlayerDeathAnim_timeout():
+	get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
+	get_tree().call_group("Enemy", "queue_free")
+	get_tree().call_group("Bullet", "queue_free")
+
 ################################################### DEBUG STUFF ###################################################
 func _debug_stuff():
 	#Cheats
@@ -147,6 +147,7 @@ func _debug_stuff():
 	$debuginfo/LHP.text = str("HP = ", Global.health)
 	$debuginfo/LScore.text = str("score = ", Global.score)
 	$debuginfo/LTimerAttack.text = str("enemy time left = ", "%.2f" % Global.TimerAttack.time_left)
+	$debuginfo/LTimerPlayerDeathAnim.text = str("player death anim time left = ", "%.2f" % Global.TimerPlayerDeathAnim.time_left)
 	$debuginfo/LTimerEnemyDeathAnim.text = str("enemy death anim time left = ", "%.2f" % Global.TimerDeathAnim.time_left)
 	$debuginfo/LTimerLabelPause.text = str("pause time left = ", "%.2f" % Global.TimerPause.time_left)
 	$debuginfo/LNoHit.text = str("currently no hit? = ", no_hit)

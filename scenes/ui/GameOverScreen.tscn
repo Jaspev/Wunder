@@ -7,6 +7,7 @@
 [ext_resource path="res://textures/selector.png" type="Texture" id=5]
 
 [node name="GameoverScreen" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Selector" type="Sprite" parent="."]

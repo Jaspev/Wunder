@@ -1,5 +1,7 @@
 extends Node2D
 
+var border = preload("res://scenes/ui/Border.tscn")
+
 #enemy vars
 var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
 var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")
@@ -28,7 +30,7 @@ func _rand_shuffle():
 	enemies_secret.shuffle()
 
 func _ready():
-	enemies_g1 = [enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
+	enemies_g1 = [enemy_lamp] #[enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
 	enemies_secret = [enemy_secret_1]
 	_rand_shuffle()
 	rng.randomize()
@@ -110,6 +112,8 @@ func _on_TimerPause_timeout():
 	
 	no_hit = 1
 	
+	print(timeline[timeline_id].instance())
+	
 	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.boss_time_duration
 		$EnemyProgress.max_value = Global.boss_time_duration
@@ -117,6 +121,22 @@ func _on_TimerPause_timeout():
 	if "Enemy" in str(timeline[timeline_id].instance()) or "Shop" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.enemy_time_duration
 		$EnemyProgress.max_value = Global.enemy_time_duration
+	
+	if "Lamp" in str(timeline[timeline_id].instance()):
+		var playfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		var playfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		var playfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		$Border.queue_free()
+#		$EnemyProgress.position = Vector2(-272, 104)
+		$EnemyProgress.margin_top = 128
+		$EnemyProgress.margin_bottom = 160
+		playfieldborder1.position = Vector2(-256, 0)
+		add_child(playfieldborder1)
+		playfieldborder2.position = Vector2(0, 0)
+		add_child(playfieldborder2)
+		playfieldborder3.position = Vector2(256, 0)
+		add_child(playfieldborder3)
+		$Player.position = Vector2(0,0)
 	
 	Global.TimerAttack.start()
 
@@ -143,6 +163,7 @@ func _debug_stuff():
 	#Labels
 	$debuginfo/LFPS.text = str("FPS = ", Engine.get_frames_per_second())
 	$debuginfo/LHasItem.text = str("has item = ", Global.has_item)
+	$debuginfo/LCurrentItemID.text = str("current item id = ", Global.current_item_id)
 	$debuginfo/LHPStart.text = str("HP start = ", Global.health_start)
 	$debuginfo/LHP.text = str("HP = ", Global.health)
 	$debuginfo/LScore.text = str("score = ", Global.score)

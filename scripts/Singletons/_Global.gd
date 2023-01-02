@@ -31,6 +31,7 @@ var current_item_sprite = Sprite.new()
 #item vars @_@
 var has_item = 0
 var current_item_id = 0
+var tex0_null = preload("res://textures/null.png")
 var tex1_skip = preload("res://textures/test.png")
 var tex2_health1 = preload("res://textures/test.png")
 var tex3_health2 = preload("res://textures/test.png")
@@ -81,7 +82,7 @@ func _input(event):
 			stopattacktimer()
 			has_item = 0
 			current_item_id = 0
-			current_item_sprite.queue_free()
+			current_item_sprite = tex0_null
 	#ITEM ID 2: +1 HP
 	if current_item_id == 2:
 		current_item_sprite.set_texture(tex2_health1)
@@ -89,7 +90,7 @@ func _input(event):
 			health += 1
 			has_item = 0
 			current_item_id = 0
-			current_item_sprite.queue_free()
+			current_item_sprite = tex0_null
 	#ITEM ID 2: +2 HP
 	if current_item_id == 3:
 		current_item_sprite.set_texture(tex3_health2)
@@ -97,7 +98,7 @@ func _input(event):
 			health += 2
 			has_item = 0
 			current_item_id = 0
-			current_item_sprite.queue_free()
+			current_item_sprite = tex0_null
 
 func stopattacktimer():
 	TimerAttack.stop()

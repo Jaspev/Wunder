@@ -6,19 +6,19 @@
 z_index = -2
 
 [node name="BlockN" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -256 )
-scale = Vector2( 21.439, 1 )
+position = Vector2( 0, -96 )
+scale = Vector2( 8.68, 1 )
 
 [node name="BlockE" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 0 )
+position = Vector2( 96, 0 )
 rotation = 1.5708
-scale = Vector2( 21.439, 1 )
+scale = Vector2( 8.68, 1 )
 
 [node name="BlockS" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 256 )
-scale = Vector2( 21.439, 1 )
+position = Vector2( 0, 96 )
+scale = Vector2( 8.68, 1 )
 
 [node name="BlockW" parent="." instance=ExtResource( 1 )]
-position = Vector2( -256, 0 )
+position = Vector2( -96, 0 )
 rotation = 1.5708
-scale = Vector2( 21.439, 1 )
+scale = Vector2( 8.68, 1 )

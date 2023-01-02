@@ -31,7 +31,9 @@ var current_item_sprite = Sprite.new()
 #item vars @_@
 var has_item = 0
 var current_item_id = 0
-var skip_tex = preload("res://textures/test.png")
+var tex1_skip = preload("res://textures/test.png")
+var tex2_health1 = preload("res://textures/test.png")
+var tex3_health2 = preload("res://textures/test.png")
 
 func _ready():
 	add_child(current_item_sprite)
@@ -74,9 +76,25 @@ func _input(event):
 	#Item stuff
 	#ITEM ID 1: SKIP ENEMY
 	if current_item_id == 1:
-		current_item_sprite.set_texture(skip_tex)
+		current_item_sprite.set_texture(tex1_skip)
 		if Input.is_action_just_pressed("use_item") and !TimerAttack.is_stopped():
 			stopattacktimer()
+			has_item = 0
+			current_item_id = 0
+			current_item_sprite.queue_free()
+	#ITEM ID 2: +1 HP
+	if current_item_id == 2:
+		current_item_sprite.set_texture(tex2_health1)
+		if Input.is_action_just_pressed("use_item") and !TimerAttack.is_stopped():
+			health += 1
+			has_item = 0
+			current_item_id = 0
+			current_item_sprite.queue_free()
+	#ITEM ID 2: +2 HP
+	if current_item_id == 3:
+		current_item_sprite.set_texture(tex3_health2)
+		if Input.is_action_just_pressed("use_item") and !TimerAttack.is_stopped():
+			health += 2
 			has_item = 0
 			current_item_id = 0
 			current_item_sprite.queue_free()

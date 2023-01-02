@@ -8,7 +8,9 @@ var hp_items = []
 var speed1 = preload("res://scenes/items/ItemPassSpeed1.tscn")
 var pass_items = []
 
-var skip_enemy = preload("res://scenes/items/ItemUseSkipEnemy.tscn")
+var use001skip_enemy = preload("res://scenes/items/ItemUse001SkipEnemy.tscn")
+var use002hp1 = preload("res://scenes/items/ItemUse002HP1.tscn")
+var use003hp2 = preload("res://scenes/items/ItemUse003HP2.tscn")
 var use_items = []
 
 func _ready():
@@ -20,7 +22,7 @@ func _ready():
 	
 	hp_items = [hp1, hp2]
 	pass_items = [speed1]
-	use_items = [skip_enemy]
+	use_items = [use001skip_enemy, use002hp1, use003hp2]
 	
 	#summon random hp item
 	var rand_hp = hp_items[randi() % hp_items.size()]

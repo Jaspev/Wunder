@@ -123,20 +123,33 @@ func _on_TimerPause_timeout():
 		$EnemyProgress.max_value = Global.enemy_time_duration
 	
 	if "Lamp" in str(timeline[timeline_id].instance()):
-		var playfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
-		var playfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
-		var playfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		var lampplayfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		var lampplayfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+		var lampplayfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
 		$Border.queue_free()
-#		$EnemyProgress.position = Vector2(-272, 104)
 		$EnemyProgress.margin_top = 128
 		$EnemyProgress.margin_bottom = 160
-		playfieldborder1.position = Vector2(-256, 0)
-		add_child(playfieldborder1)
-		playfieldborder2.position = Vector2(0, 0)
-		add_child(playfieldborder2)
-		playfieldborder3.position = Vector2(256, 0)
-		add_child(playfieldborder3)
-		$Player.position = Vector2(0,0)
+		lampplayfieldborder1.position.x = -256
+		add_child(lampplayfieldborder1)
+		lampplayfieldborder2.position.x = 0
+		add_child(lampplayfieldborder2)
+		lampplayfieldborder3.position.x = 256
+		add_child(lampplayfieldborder3)
+		var playerpos = [-256, 0, 256]
+		var rand_pos = playerpos[randi() % playerpos.size()]
+		$Player.position.x = rand_pos
+		var shuffle_tween = Tween.new()
+		shuffle_tween.interpolate_property(
+			lampplayfieldborder1,
+			"position",
+			Vector2(-256,0),
+			Vector2(-128,256),
+			0.5,
+			Tween.TRANS_QUINT
+		)
+		add_child(shuffle_tween)
+		print("URETHRA")
+		shuffle_tween.start()
 	
 	Global.TimerAttack.start()
 

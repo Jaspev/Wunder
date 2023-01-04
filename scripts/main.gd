@@ -129,7 +129,7 @@ func _on_TimerPause_timeout():
 		$Border.queue_free()
 		$EnemyProgress.margin_top = 128
 		$EnemyProgress.margin_bottom = 160
-		lampplayfieldborder1.position.x = -256
+		lampplayfieldborder1.position.x = -256;
 		add_child(lampplayfieldborder1)
 		lampplayfieldborder2.position.x = 0
 		add_child(lampplayfieldborder2)
@@ -139,17 +139,11 @@ func _on_TimerPause_timeout():
 		var rand_pos = playerpos[randi() % playerpos.size()]
 		$Player.position.x = rand_pos
 		var shuffle_tween = Tween.new()
-		shuffle_tween.interpolate_property(
-			lampplayfieldborder1,
-			"position",
-			Vector2(-256,0),
-			Vector2(-128,256),
-			0.5,
-			Tween.TRANS_QUINT
-		)
 		add_child(shuffle_tween)
-		print("URETHRA")
+		shuffle_tween.interpolate_property(lampplayfieldborder1, "position", Vector2(-256,0), Vector2(-128,256), 0.5)
 		shuffle_tween.start()
+		yield(shuffle_tween, "tween_completed")
+		shuffle_tween.interpolate_property(lampplayfieldborder1, "position", Vector2(-128,256), Vector2(0,0), 0.5)
 	
 	Global.TimerAttack.start()
 

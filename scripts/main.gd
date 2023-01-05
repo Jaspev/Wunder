@@ -23,6 +23,12 @@ var no_hit = 1
 
 var rng = RandomNumberGenerator.new()
 
+var lampplayfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+var lampplayfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+var lampplayfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
+
+var shuffle_tween = Tween.new()
+
 func _rand_shuffle():
 	randomize()
 	enemies_g1.shuffle()
@@ -123,27 +129,37 @@ func _on_TimerPause_timeout():
 		$EnemyProgress.max_value = Global.enemy_time_duration
 	
 	if "Lamp" in str(timeline[timeline_id].instance()):
-		var lampplayfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
-		var lampplayfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
-		var lampplayfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
 		$Border.queue_free()
+		
 		$EnemyProgress.margin_top = 128
 		$EnemyProgress.margin_bottom = 160
-		lampplayfieldborder1.position.x = -256;
-		add_child(lampplayfieldborder1)
-		lampplayfieldborder2.position.x = 0
-		add_child(lampplayfieldborder2)
-		lampplayfieldborder3.position.x = 256
-		add_child(lampplayfieldborder3)
+		
 		var playerpos = [-256, 0, 256]
 		var rand_pos = playerpos[randi() % playerpos.size()]
 		$Player.position.x = rand_pos
-		var shuffle_tween = Tween.new()
+		
+		lampplayfieldborder1.position.x = -256
+		lampplayfieldborder2.position.x = 0
+		lampplayfieldborder3.position.x = 256
+		add_child(lampplayfieldborder1)
+		add_child(lampplayfieldborder2)
+		add_child(lampplayfieldborder3)
+		var borderarray = [lampplayfieldborder1, lampplayfieldborder2, lampplayfieldborder3]
+		
+		rng.randomize()
+		var selectedborder1 = rng.randi_range(1, 3)
+		var selectedborder2 = rng.randi_range(1, 3)
+		while selectedborder1 == selectedborder2:
+			selectedborder1 = rng.randi_range(1, 3)
+		
 		add_child(shuffle_tween)
-		shuffle_tween.interpolate_property(lampplayfieldborder1, "position", Vector2(-256,0), Vector2(-128,256), 0.5)
-		shuffle_tween.start()
-		yield(shuffle_tween, "tween_completed")
-		shuffle_tween.interpolate_property(lampplayfieldborder1, "position", Vector2(-128,256), Vector2(0,0), 0.5)
+		
+		#list of all possible selectedborder1 and selectedborder2 combinations
+		if selectedborder1 == 1 or selectedborder2 == 1 and selectedborder1 == 2 or selectedborder2 == 2:
+			shuffle_tween.interpolate_property(lampplayfieldborder1, "position", Vector2(-256,0), Vector2(-128,256), 0.5)
+			shuffle_tween.start()
+		
+#		shuffle_tween.connect("tween_completed", self, "_on_shuffle_tween_tween_completed")
 	
 	Global.TimerAttack.start()
 

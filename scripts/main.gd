@@ -29,6 +29,7 @@ var lampplayfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance(
 
 var shuffle_tween1 = Tween.new()
 var shuffle_tween2 = Tween.new()
+var shuffle_tween_timer = Timer.new()
 
 func _rand_shuffle():
 	randomize()
@@ -152,8 +153,14 @@ func _on_TimerPause_timeout():
 		while selectedborder1 == selectedborder2:
 			selectedborder1 = rng.randi_range(1, 3)
 		
+		
+		var shufflespeed = 0.4
+		shuffle_tween_timer.one_shot = true
+		shuffle_tween_timer.wait_time = shufflespeed
+		shuffle_tween_timer.pause_mode = 3
 		add_child(shuffle_tween1)
 		add_child(shuffle_tween2)
+		add_child(shuffle_tween_timer)
 		
 		#list of all possible selectedborder1 and selectedborder2 combinations
 		var pos1 = Vector2(-256,0)
@@ -166,95 +173,101 @@ func _on_TimerPause_timeout():
 		var posbot = Vector2(0, -256)
 		var posnbot = Vector2(0, 256)
 		
-		var passes = 5
+		
+		var passes = 40
 		while passes > 0:
+			selectedborder1 = 1
+			selectedborder2 = 2
 			if selectedborder1 == 1 and selectedborder2 == 2:
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween2.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, 0.5)
-				shuffle_tween2.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween_timer.start()
+				if !shuffle_tween1.is_active():
+					shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween1.start()
+					shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				if !shuffle_tween1.is_active():
+					lampplayfieldborder1.position.x = -256
+					lampplayfieldborder2.position.x = 0
+					lampplayfieldborder3.position.x = 256
 				
 				
 			if selectedborder1 == 1 and selectedborder2 == 3:
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, posbot, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, posnbot, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder3, "position", pos3, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", posbot, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", posbot, pos3, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", posnbot, pos1, 0.5)
-				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
+				shuffle_tween2.interpolate_property(lampplayfieldborder3, "position", posnbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 2 and selectedborder2 == 1:
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, pos12, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, posn12, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder1, "position", pos1, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos12, pos1, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", posn12, pos2, 0.5)
-				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
+				shuffle_tween2.interpolate_property(lampplayfieldborder1, "position", posn12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 2 and selectedborder2 == 3:
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, pos23, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, posn23, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder3, "position", pos3, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos23, pos3, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", posn23, pos2, 0.5)
-				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
+				shuffle_tween2.interpolate_property(lampplayfieldborder3, "position", posn23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 3 and selectedborder2 == 1:
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, posnbot, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder1, "position", pos1, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", posnbot, pos3, 0.5)
-				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
+				shuffle_tween2.interpolate_property(lampplayfieldborder1, "position", posnbot, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 3 and selectedborder2 == 2:
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, pos23, 0.5)
+				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos3, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, posn23, 0.5)
+				shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", pos2, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
-				shuffle_tween1.interpolate_property(lampplayfieldborder3, "position", pos23, pos2, 0.5)
-				shuffle_tween1.start()
-				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", posn23, pos3, 0.5)
-				shuffle_tween1.start()
-				yield(get_tree().create_timer(0.5),"timeout")
+				shuffle_tween2.interpolate_property(lampplayfieldborder2, "position", posn23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween2.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
@@ -264,6 +277,9 @@ func _on_TimerPause_timeout():
 			selectedborder2 = rng.randi_range(1, 3)
 			while selectedborder1 == selectedborder2:
 				selectedborder1 = rng.randi_range(1, 3)
+			
+			if shufflespeed >= 0.1:
+				shufflespeed -= 0.01
 			
 			passes -= 1
 	

@@ -3,9 +3,9 @@ extends Node2D
 var border = preload("res://scenes/ui/Border.tscn")
 
 #enemy vars
-var enemy_flower = preload("res://scenes/enemies/EnemyG1Flower.tscn")
-var enemy_eye = preload("res://scenes/enemies/EnemyG1Eye.tscn")
-var enemy_lamp = preload("res://scenes/enemies/EnemyG1Lamp.tscn")
+var enemy001 = preload("res://scenes/enemies/EnemyG1Flower.tscn")
+var enemy002 = preload("res://scenes/enemies/EnemyG1Eye.tscn")
+var enemy003 = preload("res://scenes/enemies/EnemyG1003.tscn")
 var enemy004 = preload("res://scenes/enemies/EnemyG1004.tscn")
 var enemy005 = preload("res://scenes/enemies/EnemyG1005.tscn")
 var enemies_g1 = []
@@ -13,7 +13,7 @@ var enemies_g1 = []
 var enemy_secret_1 = preload("res://scenes/enemies/EnemySecret001.tscn")
 var enemies_secret = []
 
-var boss001 = [preload("res://scenes/bosses/Boss001.tscn")]
+var boss001 = [preload("res://scenes/bosses/Boss01Lamp.tscn")]
 var shop = [preload("res://scenes/Shop.tscn")]
 
 var timeline = []
@@ -36,7 +36,7 @@ func _rand_shuffle():
 	enemies_secret.shuffle()
 
 func _ready():
-	enemies_g1 = [enemy_lamp] #[enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
+	enemies_g1 = [enemy001] #[enemy_flower, enemy_eye, enemy_lamp, enemy004, enemy005]
 	enemies_secret = [enemy_secret_1]
 	_rand_shuffle()
 	rng.randomize()
@@ -120,6 +120,7 @@ func _on_TimerPause_timeout():
 	
 	print(timeline[timeline_id].instance())
 	
+	
 	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.boss_time_duration
 		$EnemyProgress.max_value = Global.boss_time_duration
@@ -128,11 +129,20 @@ func _on_TimerPause_timeout():
 		Global.TimerAttack.wait_time = Global.enemy_time_duration
 		$EnemyProgress.max_value = Global.enemy_time_duration
 	
+	Global.TimerAttack.start()
+	
 	if "Lamp" in str(timeline[timeline_id].instance()):
-#		$Border.queue_free()
+		$Border.queue_free()
 		
+		$EnemyProgress.margin_left = -365
 		$EnemyProgress.margin_top = 128
+		$EnemyProgress.margin_right = 365
 		$EnemyProgress.margin_bottom = 160
+		
+		$HeartUI.margin_left = -440
+		$HeartUI.margin_top = -112
+		$HeartUI.margin_right = -376
+		$HeartUI.margin_bottom = 208
 		
 		var playerpos = [-256, 0, 256]
 		var rand_pos = playerpos[randi() % playerpos.size()]
@@ -151,10 +161,8 @@ func _on_TimerPause_timeout():
 		while selectedborder1 == selectedborder2:
 			selectedborder1 = rng.randi_range(1, 3)
 		
-		var shufflespeed = 0.4
+		var shufflespeed = 0.3
 		add_child(shuffle_tween1)
-		
-		shuffle_tween1.connect("tween_completed", self, "_on_shuffle_tween1_tween_completed")
 		
 		#list of all possible selectedborder1 and selectedborder2 combinations
 		var pos1 = Vector2(-256,0)
@@ -167,22 +175,19 @@ func _on_TimerPause_timeout():
 		var posbot = Vector2(0, -256)
 		var posnbot = Vector2(0, 256)
 		
-		var passes = 40
+		var passes = 30
 		while passes > 0:
-			selectedborder1 = 1
-			selectedborder2 = 2
-			
 			if selectedborder1 == 1 and selectedborder2 == 2:
 				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
 				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween1.start()
-#				yield(get_tree().create_timer(shufflespeed),"timeout")
-#				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-#				shuffle_tween1.start()
-#				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-#				shuffle_tween1.start()
-#				yield(get_tree().create_timer(shufflespeed),"timeout")
+				yield(get_tree().create_timer(shufflespeed),"timeout")
+				shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween1.start()
+				shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				shuffle_tween1.start()
+				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
@@ -272,27 +277,19 @@ func _on_TimerPause_timeout():
 				shufflespeed -= 0.01
 			
 			passes -= 1
-	
+	else:
+		$EnemyProgress.margin_left = -268
+		$EnemyProgress.margin_top = 288
+		$EnemyProgress.margin_right = 268
+		$EnemyProgress.margin_bottom = 320
+		
+		$HeartUI.margin_left = -344
+		$HeartUI.margin_top = -268
+		$HeartUI.margin_right = -280
+		$HeartUI.margin_bottom = 52
+		
 #		shuffle_tween.connect("tween_completed", self, "_on_shuffle_tween_tween_completed")
 	
-	Global.TimerAttack.start()
-
-func _on_shuffle_tween1_tween_completed(object, key):
-	var pos1 = Vector2(-256,0)
-	var pos12 = Vector2(-128, -256)
-	var posn12 = Vector2(-128, 256)
-	var pos2 = Vector2(0,0)
-	var pos23 = Vector2(128,-256)
-	var posn23 = Vector2(128,256)
-	var pos3 = Vector2(256,0)
-	var posbot = Vector2(0, -256)
-	var posnbot = Vector2(0, 256)
-	var shufflespeed = 0.4
-	
-	shuffle_tween1.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	shuffle_tween1.start()
-	shuffle_tween1.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	shuffle_tween1.start()
 
 func _on_TimerPlayerDeathAnim_timeout():
 	get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")

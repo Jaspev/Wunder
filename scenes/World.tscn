@@ -168,7 +168,6 @@ text = "SCORE"
 autowrap = true
 
 [node name="Doors" type="Node2D" parent="."]
-visible = false
 position = Vector2( -6.10352e-05, 0 )
 script = ExtResource( 13 )
 

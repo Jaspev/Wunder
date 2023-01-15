@@ -183,9 +183,6 @@ func _on_TimerPause_timeout():
 		
 		var passes = 30
 		while passes > 0:
-			selectedborder1 = 1
-			selectedborder2 = 2
-			
 			if selectedborder1 == 1 and selectedborder2 == 2:
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
@@ -320,7 +317,6 @@ func _on_TimerPause_timeout():
 		
 #		shuffle_tween.connect("tween_completed", self, "_on_shuffle_tween_tween_completed")
 	
-
 func _on_TimerPlayerDeathAnim_timeout():
 	get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
 	get_tree().call_group("Enemy", "queue_free")

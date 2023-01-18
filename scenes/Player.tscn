@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://textures/men.png" type="Texture" id=1]
+[ext_resource path="res://textures/player.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://audio/enemy_death_lq.ogg" type="AudioStream" id=3]
 

@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/ui/OptionsScreen.gd" type="Script" id=2]
 [ext_resource path="res://fonts/jpix5.tres" type="DynamicFont" id=3]
 [ext_resource path="res://fonts/jpix10.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://textures/selector.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui/selector.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 109

@@ -31,10 +31,10 @@ var current_item_sprite = Sprite.new()
 #item vars @_@
 var has_item = 0
 var current_item_id = 0
-var tex0_null = preload("res://textures/null.png")
-var tex1_skip = preload("res://textures/test.png")
-var tex2_health1 = preload("res://textures/test.png")
-var tex3_health2 = preload("res://textures/test.png")
+var tex0_null = preload("res://textures/dev/null.png")
+var tex1_skip = preload("res://textures/dev/test.png")
+var tex2_health1 = preload("res://textures/dev/test.png")
+var tex3_health2 = preload("res://textures/dev/test.png")
 
 func _ready():
 	add_child(current_item_sprite)

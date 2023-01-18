@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://_placeholder.png" type="Texture" id=1]
+[ext_resource path="res://textures/dev/_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemies/EnemyG1004.gd" type="Script" id=2]
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=3]
 

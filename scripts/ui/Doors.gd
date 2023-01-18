@@ -28,7 +28,8 @@ var rdoor_closed = Vector2(704, 0)
 func _ready():
 	door_L.set_texture(tex_titleL)
 	door_R.set_texture(tex_titleR)
-
+	add_child(door_L)
+	add_child(door_R)
 	add_child(door_tween)
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
@@ -80,26 +81,7 @@ func _door_open():
 #on main menu start button press
 func _on_ButtonStart_pressed():
 	get_tree().paused = true
-	door_tween.interpolate_property(
-		door_L,
-		"position",
-		ldoor_open,
-		ldoor_closed,
-		2,
-		Tween.TRANS_BOUNCE,
-		Tween.EASE_OUT
-	)
-	door_tween.start()
-	door_tween.interpolate_property(
-		door_R,
-		"position",
-		rdoor_open,
-		rdoor_closed,
-		2,
-		Tween.TRANS_BOUNCE,
-		Tween.EASE_OUT
-	)
-	door_tween.start()
+	_door_close()
 
 func _on_TimerAttack_timeout():
 	_door_close()

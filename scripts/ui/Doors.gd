@@ -20,14 +20,20 @@ onready var tween_ldoor_open = $DoorLeft/tween_ldoor_open
 onready var tween_rdoor_close = $DoorRight/tween_rdoor_close
 onready var tween_rdoor_open = $DoorRight/tween_rdoor_open
 
-var ldoor_open = Vector2(-1185, 0)
-var ldoor_closed = Vector2(-704, 0)
-var rdoor_open = Vector2(1185, 0)
-var rdoor_closed = Vector2(704, 0)
+var rdoor_open = Vector2(-480, 0)
+var rdoor_closed = Vector2(0, 0)
+var ldoor_open = Vector2(480, 0)
+var ldoor_closed = Vector2(0, 0)
 
 func _ready():
 	door_L.set_texture(tex_titleL)
+	door_L.scale.x = 3.2
+	door_L.scale.y = 3.2
+	door_L.z_index = 999
 	door_R.set_texture(tex_titleR)
+	door_R.scale.x = 3.2
+	door_R.scale.y = 3.2
+	door_R.z_index = 999
 	add_child(door_L)
 	add_child(door_R)
 	add_child(door_tween)
@@ -81,7 +87,26 @@ func _door_open():
 #on main menu start button press
 func _on_ButtonStart_pressed():
 	get_tree().paused = true
-	_door_close()
+	door_tween.interpolate_property(
+		door_L,
+		"position",
+		ldoor_closed,
+		ldoor_open,
+		2,
+		Tween.TRANS_QUINT,
+		Tween.EASE_OUT
+	)
+	door_tween.start()
+	door_tween.interpolate_property(
+		door_R,
+		"position",
+		rdoor_closed,
+		rdoor_open,
+		2,
+		Tween.TRANS_QUINT,
+		Tween.EASE_OUT
+	)
+	door_tween.start()
 
 func _on_TimerAttack_timeout():
 	_door_close()

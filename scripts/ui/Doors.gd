@@ -15,11 +15,6 @@ var door_L = Sprite.new()
 var door_R = Sprite.new()
 var door_tween = Tween.new()
 
-onready var tween_ldoor_close = $DoorLeft/tween_ldoor_close
-onready var tween_ldoor_open = $DoorLeft/tween_ldoor_open
-onready var tween_rdoor_close = $DoorRight/tween_rdoor_close
-onready var tween_rdoor_open = $DoorRight/tween_rdoor_open
-
 var rdoor_open = Vector2(-480, 0)
 var rdoor_closed = Vector2(0, 0)
 var ldoor_open = Vector2(480, 0)
@@ -30,15 +25,36 @@ func _ready():
 	door_L.scale.x = 3.2
 	door_L.scale.y = 3.2
 	door_L.z_index = 999
+	door_L.position = Vector2(480, 0)
+	add_child(door_L)
 	door_R.set_texture(tex_titleR)
 	door_R.scale.x = 3.2
 	door_R.scale.y = 3.2
 	door_R.z_index = 999
-	add_child(door_L)
+	door_R.position = Vector2(-480, 0)
 	add_child(door_R)
 	add_child(door_tween)
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerPause.connect("timeout", self, "_on_TimerPause_timeout")
+
+#on main menu start button press
+func _on_ButtonStart_pressed():
+	get_tree().paused = true
+	_door_close()
+
+func _on_TimerAttack_timeout():
+	_door_close()
+
+func _on_TimerPause_timeout():
+	door_L.set_texture(tex_enemyL)
+	door_R.set_texture(tex_enemyR)
+	_door_open()
+
+func _physics_process(_delta):
+	if Global.health <= 0:
+		door_L.set_texture(tex_deathL)
+		door_R.set_texture(tex_deathR)
+		_door_close()
 
 func _door_close():
 	door_tween.interpolate_property(
@@ -83,41 +99,3 @@ func _door_open():
 		Tween.EASE_OUT
 	)
 	door_tween.start()
-
-#on main menu start button press
-func _on_ButtonStart_pressed():
-	get_tree().paused = true
-	door_tween.interpolate_property(
-		door_L,
-		"position",
-		ldoor_closed,
-		ldoor_open,
-		2,
-		Tween.TRANS_QUINT,
-		Tween.EASE_OUT
-	)
-	door_tween.start()
-	door_tween.interpolate_property(
-		door_R,
-		"position",
-		rdoor_closed,
-		rdoor_open,
-		2,
-		Tween.TRANS_QUINT,
-		Tween.EASE_OUT
-	)
-	door_tween.start()
-
-func _on_TimerAttack_timeout():
-	_door_close()
-
-func _on_TimerPause_timeout():
-	door_L.set_texture(tex_enemyL)
-	door_R.set_texture(tex_enemyR)
-	_door_open()
-
-func _physics_process(delta):
-	if Global.health <= 0:
-		door_L.set_texture(tex_deathL)
-		door_R.set_texture(tex_deathR)
-		_door_close()

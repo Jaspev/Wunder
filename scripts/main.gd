@@ -122,7 +122,9 @@ func _on_TimerPause_timeout():
 	
 	no_hit = 1
 	
-	print(timeline[timeline_id].instance())
+	Global.current_enemy = timeline[timeline_id].instance()
+		
+	print("global.current_enemy = ", Global.current_enemy)
 	
 	if "Boss" in str(timeline[timeline_id].instance()) or "EnemySecret" in str(timeline[timeline_id].instance()):
 		Global.TimerAttack.wait_time = Global.boss_time_duration
@@ -152,7 +154,6 @@ func _on_TimerPause_timeout():
 		var playerpos = [-256, 0, 256]
 		var rand_pos = playerpos[randi() % playerpos.size()]
 		$Player.position.x = rand_pos
-		print(rand_pos)
 		
 		lampplayfieldborder1.position.x = -256
 		lampplayfieldborder2.position.x = 0

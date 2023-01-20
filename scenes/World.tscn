@@ -126,9 +126,6 @@ margin_right = 159.0
 margin_bottom = 248.0
 text = "LTimelineID"
 
-[node name="UsableItemPos" type="Position2D" parent="."]
-position = Vector2( 320, 232 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
 current = true
@@ -136,6 +133,13 @@ current = true
 [node name="Player" parent="." groups=["Player"] instance=ExtResource( 1 )]
 pause_mode = 1
 z_index = 10
+
+[node name="Doors" type="Node2D" parent="."]
+position = Vector2( -6.10352e-05, 0 )
+script = ExtResource( 13 )
+
+[node name="UsableItemPos" type="Position2D" parent="."]
+position = Vector2( 320, 232 )
 
 [node name="EnemyProgress" type="ProgressBar" parent="."]
 margin_left = -268.0
@@ -164,10 +168,6 @@ margin_bottom = -112.0
 custom_fonts/font = SubResource( 3 )
 text = "SCORE"
 autowrap = true
-
-[node name="Doors" type="Node2D" parent="."]
-position = Vector2( -6.10352e-05, 0 )
-script = ExtResource( 13 )
 
 [node name="AudioDoorClose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

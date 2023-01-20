@@ -43,6 +43,15 @@ func _on_ButtonStart_pressed():
 	_door_close()
 
 func _on_TimerAttack_timeout():
+	if "Boss" in str(Global.current_enemy):
+		door_L.set_texture(tex_bossL)
+		door_R.set_texture(tex_bossR)
+	elif "Enemy" in str(Global.current_enemy):
+		door_L.set_texture(tex_enemyL)
+		door_R.set_texture(tex_enemyR)
+	elif "Shop" in str(Global.current_enemy):
+		door_L.set_texture(tex_shopL)
+		door_R.set_texture(tex_shopR)
 	_door_close()
 
 func _on_TimerPause_timeout():

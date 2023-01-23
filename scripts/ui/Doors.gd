@@ -15,10 +15,10 @@ var door_L = Sprite.new()
 var door_R = Sprite.new()
 var door_tween = Tween.new()
 
-var rdoor_open = Vector2(-480, 0)
-var rdoor_closed = Vector2(0, 0)
-var ldoor_open = Vector2(480, 0)
-var ldoor_closed = Vector2(0, 0)
+var rdoor_open = Vector2(960, 0)
+var rdoor_closed = Vector2(480, 0)
+var ldoor_open = Vector2(-960, 0)
+var ldoor_closed = Vector2(-480, 0)
 
 func _ready():
 	door_L.set_texture(tex_titleL)
@@ -43,20 +43,9 @@ func _on_ButtonStart_pressed():
 	_door_close()
 
 func _on_TimerAttack_timeout():
-	if "Boss" in str(Global.current_enemy):
-		door_L.set_texture(tex_bossL)
-		door_R.set_texture(tex_bossR)
-	elif "Enemy" in str(Global.current_enemy):
-		door_L.set_texture(tex_enemyL)
-		door_R.set_texture(tex_enemyR)
-	elif "Shop" in str(Global.current_enemy):
-		door_L.set_texture(tex_shopL)
-		door_R.set_texture(tex_shopR)
 	_door_close()
 
 func _on_TimerPause_timeout():
-	door_L.set_texture(tex_enemyL)
-	door_R.set_texture(tex_enemyR)
 	_door_open()
 
 func _physics_process(_delta):

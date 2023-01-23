@@ -63,6 +63,9 @@ func _ready():
 	
 #	$AudioMusic.play()
 
+	yield(get_tree().create_timer(1),"timeout")
+	$QueueFreeDoors.queue_free()
+
 func _physics_process(delta):
 	_debug_stuff()
 	

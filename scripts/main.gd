@@ -120,6 +120,9 @@ func _on_TimerDeathAnim_timeout():
 	get_tree().call_group("Bullet", "queue_free")
 	$Player.position = Vector2(0,0)
 
+func _simplified_player_position():
+	pass
+
 func _on_TimerPause_timeout():
 	add_child(timeline[timeline_id].instance()) #summon next thing in timeline
 	
@@ -192,10 +195,10 @@ func _on_TimerPause_timeout():
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
-				if rand_pos == -256:
+				if $Player.position.x < -128:
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
-				if rand_pos == 256:
+				if $Player.position.x == 128:
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 				yield(get_tree().create_timer(shufflespeed),"timeout")

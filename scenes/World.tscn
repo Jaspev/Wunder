@@ -143,6 +143,9 @@ script = ExtResource( 13 )
 [node name="UsableItemPos" type="Position2D" parent="."]
 position = Vector2( 320, 232 )
 
+[node name="UsableItemPos2" type="Position2D" parent="."]
+position = Vector2( -128, 0 )
+
 [node name="EnemyProgress" type="ProgressBar" parent="."]
 margin_left = -268.0
 margin_top = 288.0
@@ -186,6 +189,7 @@ stream = ExtResource( 12 )
 bus = "Music"
 
 [node name="QueueFreeDoors" type="Node2D" parent="."]
+visible = false
 z_index = 150
 
 [node name="IntroDoorL" type="Sprite" parent="QueueFreeDoors"]

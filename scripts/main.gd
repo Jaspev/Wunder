@@ -120,9 +120,6 @@ func _on_TimerDeathAnim_timeout():
 	get_tree().call_group("Bullet", "queue_free")
 	$Player.position = Vector2(0,0)
 
-func _simplified_player_position():
-	pass
-
 func _on_TimerPause_timeout():
 	add_child(timeline[timeline_id].instance()) #summon next thing in timeline
 	
@@ -177,7 +174,7 @@ func _on_TimerPause_timeout():
 		var shufflespeed = 0.3
 		add_child(shuffle_tween)
 		
-		#list of all possible selectedborder1 and selectedborder2 combinations
+		#list of all possible selectedborder combinations
 		var pos1 = Vector2(-256,0)
 		var pos12 = Vector2(-128, -256)
 		var posn12 = Vector2(-128, 256)
@@ -188,38 +185,51 @@ func _on_TimerPause_timeout():
 		var posbot = Vector2(0, -256)
 		var posnbot = Vector2(0, 256)
 		
+		yield(get_tree().create_timer(5),"timeout")
+		
 		var passes = 30
 		while passes > 0:
+			var playerborderpos = $Player.position.x
 			if selectedborder1 == 1 and selectedborder2 == 2:
+				if playerborderpos < -125:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos > -125 and playerborderpos < 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
-				if $Player.position.x < -128:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				if $Player.position.x == 128:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
 				yield(get_tree().create_timer(shufflespeed),"timeout")
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
-				if rand_pos == -256:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					rand_pos = 1
-				if rand_pos == 256:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					rand_pos = 1
 				yield(get_tree().create_timer(shufflespeed),"timeout")
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 1 and selectedborder2 == 3:
+				if playerborderpos < -125:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos > 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -235,6 +245,18 @@ func _on_TimerPause_timeout():
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 2 and selectedborder2 == 1:
+				if playerborderpos > -125 and playerborderpos < 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos < -125:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -250,6 +272,18 @@ func _on_TimerPause_timeout():
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 2 and selectedborder2 == 3:
+				if playerborderpos > -125 and playerborderpos < 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos > 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -265,6 +299,18 @@ func _on_TimerPause_timeout():
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 3 and selectedborder2 == 1:
+				if playerborderpos > 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos < -125:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -280,6 +326,18 @@ func _on_TimerPause_timeout():
 				lampplayfieldborder3.position.x = 256
 				
 			if selectedborder1 == 3 and selectedborder2 == 2:
+				if playerborderpos > 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+				if playerborderpos > -125 and playerborderpos < 130:
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
+					yield(get_tree().create_timer(shufflespeed),"timeout")
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -293,6 +351,7 @@ func _on_TimerPause_timeout():
 				lampplayfieldborder1.position.x = -256
 				lampplayfieldborder2.position.x = 0
 				lampplayfieldborder3.position.x = 256
+				
 				
 			rng.randomize()
 			selectedborder1 = rng.randi_range(1, 3)
@@ -346,6 +405,8 @@ func _debug_stuff():
 
 	#Labels
 	$debuginfo/LFPS.text = str("FPS = ", Engine.get_frames_per_second())
+	$debuginfo/LPlayerPosX.text = str("PlayerX = ", $Player.position.x)
+	$debuginfo/LPlayerPosY.text = str("PlayerY = ", $Player.position.y)
 	$debuginfo/LHasItem.text = str("has item = ", Global.has_item)
 	$debuginfo/LCurrentItemID.text = str("current item id = ", Global.current_item_id)
 	$debuginfo/LHPStart.text = str("HP start = ", Global.health_start)

@@ -228,7 +228,7 @@ func _on_TimerPause_timeout():
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, posnbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 					yield(get_tree().create_timer(shufflespeed),"timeout")
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				shuffle_tween.start()
@@ -252,7 +252,7 @@ func _on_TimerPause_timeout():
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 					yield(get_tree().create_timer(shufflespeed),"timeout")
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -279,7 +279,7 @@ func _on_TimerPause_timeout():
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 					shuffle_tween.start()
 					yield(get_tree().create_timer(shufflespeed),"timeout")
 					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)

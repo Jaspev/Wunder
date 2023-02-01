@@ -8,7 +8,7 @@
 z_index = 803
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Cover" type="Sprite" parent="."]
 visible = false
 scale = Vector2( 208, 208 )
 texture = ExtResource( 3 )

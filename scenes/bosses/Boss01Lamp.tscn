@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=1]
 [ext_resource path="res://textures/enemies/lampman/lampmanBody.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://textures/enemies/lampman/lampmanHandL.png" type="Texture" id=4]
 [ext_resource path="res://textures/enemies/lampman/lampmanHandR.png" type="Texture" id=5]
 [ext_resource path="res://scripts/enemies/Boss01Lamp.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Death"
@@ -103,3 +104,5 @@ anims/RESET = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
 bus = "Music"
+
+[node name="Player" parent="." instance=ExtResource( 7 )]

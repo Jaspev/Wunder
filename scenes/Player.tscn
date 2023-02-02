@@ -72,7 +72,7 @@ tracks/0/keys = {
 "values": [ true, false, true ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]

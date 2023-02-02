@@ -1,17 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/ui/Block.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ui/BorderSmall.gd" type="Script" id=2]
-[ext_resource path="res://textures/ui/whitepixel.png" type="Texture" id=3]
 
 [node name="Border" type="Node2D"]
 z_index = 803
 script = ExtResource( 2 )
-
-[node name="Cover" type="Sprite" parent="."]
-visible = false
-scale = Vector2( 208, 208 )
-texture = ExtResource( 3 )
 
 [node name="BlockN" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -96 )

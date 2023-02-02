@@ -1,7 +1,7 @@
 extends Node2D
 
-var cover = Sprite.new()
 var texwhite = preload("res://textures/ui/whitepixel.png")
+var cover = Sprite.new()
 var fade_tween = Tween.new()
 
 func _ready():
@@ -9,7 +9,7 @@ func _ready():
 	cover.scale.x = 208
 	cover.scale.y = 208
 	cover.modulate.a = 0
-	add_child(cover)
+#	add_child(cover)
 	
 	yield(get_tree().create_timer(2.5),"timeout")
 	

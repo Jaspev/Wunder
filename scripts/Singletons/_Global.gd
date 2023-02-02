@@ -1,15 +1,15 @@
 extends Node
 
 #player vars
-	#health vars
+#health vars
 var health = 5
 var health_cap = 5
 var health_start = 5
-	#movement vars
+#movement vars
 var move_speed = 10000
 var walk_speed_div = 1.75
 var score = 0
-	#reset vars
+#reset vars
 var reset_hp = 5
 var reset_hp_cap = 5
 var reset_hp_start = 5
@@ -37,6 +37,8 @@ var tex2_health1 = preload("res://textures/dev/test.png")
 var tex3_health2 = preload("res://textures/dev/test.png")
 
 var current_enemy = 0
+
+var player_pos = Vector2(0,0)
 
 func _ready():
 	add_child(current_item_sprite)

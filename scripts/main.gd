@@ -69,6 +69,8 @@ func _ready():
 func _physics_process(delta):
 	_debug_stuff()
 	
+	Global.player_pos = $Player.position
+	
 	#health ui
 	$HeartUI.rect_size.y = Global.health * 64
 	#score ui
@@ -158,254 +160,252 @@ func _on_TimerPause_timeout():
 		var rand_pos = playerpos[randi() % playerpos.size()]
 		$Player.position.x = rand_pos
 		
-		lampplayfieldborder1.position.x = -256
-		lampplayfieldborder2.position.x = 0
-		lampplayfieldborder3.position.x = 256
-		add_child(lampplayfieldborder1)
-		add_child(lampplayfieldborder2)
-		add_child(lampplayfieldborder3)
-		
-		rng.randomize()
-		var selectedborder1 = rng.randi_range(1, 3)
-		var selectedborder2 = rng.randi_range(1, 3)
-		while selectedborder1 == selectedborder2:
-			selectedborder1 = rng.randi_range(1, 3)
-		
-		var shufflespeed = 0.3
-		add_child(shuffle_tween)
-		
-		#list of all possible selectedborder combinations
-		var pos1 = Vector2(-256,0)
-		var pos12 = Vector2(-128, -256)
-		var posn12 = Vector2(-128, 256)
-		var pos2 = Vector2(0,0)
-		var pos23 = Vector2(128,-256)
-		var posn23 = Vector2(128,256)
-		var pos3 = Vector2(256,0)
-		var posbot = Vector2(0, -256)
-		var postop = Vector2(0, 256)
-		
-		yield(get_tree().create_timer(5),"timeout")
-		
-		var passes = 30
-		while passes > 0:
-			var playerborderpos = $Player.position.x
-			if selectedborder1 == 1 and selectedborder2 == 2:
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-			if selectedborder1 == 1 and selectedborder2 == 3:
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", postop, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-			if selectedborder1 == 2 and selectedborder2 == 1:
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", posn12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-			if selectedborder1 == 2 and selectedborder2 == 3:
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-					
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posn23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-			if selectedborder1 == 3 and selectedborder2 == 1:
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", postop, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos < -125:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-			if selectedborder1 == 3 and selectedborder2 == 2:
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				
-				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", posn23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-				shuffle_tween.start()
-				if playerborderpos > -125 and playerborderpos < 130:
-					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-					shuffle_tween.start()
-				yield(get_tree().create_timer(shufflespeed),"timeout")
-				
-				lampplayfieldborder1.position.x = -256
-				lampplayfieldborder2.position.x = 0
-				lampplayfieldborder3.position.x = 256
-				
-				
-			rng.randomize()
-			selectedborder1 = rng.randi_range(1, 3)
-			selectedborder2 = rng.randi_range(1, 3)
-			while selectedborder1 == selectedborder2:
-				selectedborder1 = rng.randi_range(1, 3)
-			
-			if shufflespeed >= 0.1:
-				shufflespeed -= 0.01
-			
-			passes -= 1
-	elif lamp_encountered == 1:
-		lamp_encountered = 2
-		
-		border.position.x = 0
-		lampplayfieldborder1.queue_free()
-		lampplayfieldborder2.queue_free()
-		lampplayfieldborder3.queue_free()
-		
-		$EnemyProgress.margin_left = -268
-		$EnemyProgress.margin_top = 288
-		$EnemyProgress.margin_right = 268
-		$EnemyProgress.margin_bottom = 320
-		
-		$HeartUI.margin_left = -344
-		$HeartUI.margin_top = -268
-		$HeartUI.margin_right = -280
-		$HeartUI.margin_bottom = 52
-		
-#		shuffle_tween.connect("tween_completed", self, "_on_shuffle_tween_tween_completed")
+#		lampplayfieldborder1.position.x = -256
+#		lampplayfieldborder2.position.x = 0
+#		lampplayfieldborder3.position.x = 256
+#		add_child(lampplayfieldborder1)
+#		add_child(lampplayfieldborder2)
+#		add_child(lampplayfieldborder3)
+#
+#		rng.randomize()
+#		var selectedborder1 = rng.randi_range(1, 3)
+#		var selectedborder2 = rng.randi_range(1, 3)
+#		while selectedborder1 == selectedborder2:
+#			selectedborder1 = rng.randi_range(1, 3)
+#
+#		var shufflespeed = 0.3
+#		add_child(shuffle_tween)
+#
+#		#list of all possible selectedborder combinations
+#		var pos1 = Vector2(-256,0)
+#		var pos12 = Vector2(-128, -256)
+#		var posn12 = Vector2(-128, 256)
+#		var pos2 = Vector2(0,0)
+#		var pos23 = Vector2(128,-256)
+#		var posn23 = Vector2(128,256)
+#		var pos3 = Vector2(256,0)
+#		var posbot = Vector2(0, -256)
+#		var postop = Vector2(0, 256)
+#
+#		yield(get_tree().create_timer(5),"timeout")
+#
+#		var passes = 30
+#		while passes > 0:
+#			var playerborderpos = $Player.position.x
+#			if selectedborder1 == 1 and selectedborder2 == 2:
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", posn12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#			if selectedborder1 == 1 and selectedborder2 == 3:
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", postop, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#			if selectedborder1 == 2 and selectedborder2 == 1:
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn12, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos12, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", posn12, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#			if selectedborder1 == 2 and selectedborder2 == 3:
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posn23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#			if selectedborder1 == 3 and selectedborder2 == 1:
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posbot, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", pos1, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, postop, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", posbot, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos1, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder1, "position", postop, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos < -125:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#			if selectedborder1 == 3 and selectedborder2 == 2:
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos3, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", pos2, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, posn23, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder3, "position", pos23, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos2, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#
+#				shuffle_tween.interpolate_property(lampplayfieldborder2, "position", posn23, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#				shuffle_tween.start()
+#				if playerborderpos > -125 and playerborderpos < 130:
+#					shuffle_tween.interpolate_property($Player, "position", $Player.position, pos3, shufflespeed, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+#					shuffle_tween.start()
+#				yield(get_tree().create_timer(shufflespeed),"timeout")
+#
+#				lampplayfieldborder1.position.x = -256
+#				lampplayfieldborder2.position.x = 0
+#				lampplayfieldborder3.position.x = 256
+#
+#
+#			rng.randomize()
+#			selectedborder1 = rng.randi_range(1, 3)
+#			selectedborder2 = rng.randi_range(1, 3)
+#			while selectedborder1 == selectedborder2:
+#				selectedborder1 = rng.randi_range(1, 3)
+#
+#			if shufflespeed >= 0.1:
+#				shufflespeed -= 0.01
+#
+#			passes -= 1
+#	elif lamp_encountered == 1:
+#		lamp_encountered = 2
+#
+#		border.position.x = 0
+#		lampplayfieldborder1.queue_free()
+#		lampplayfieldborder2.queue_free()
+#		lampplayfieldborder3.queue_free()
+#
+#		$EnemyProgress.margin_left = -268
+#		$EnemyProgress.margin_top = 288
+#		$EnemyProgress.margin_right = 268
+#		$EnemyProgress.margin_bottom = 320
+#
+#		$HeartUI.margin_left = -344
+#		$HeartUI.margin_top = -268
+#		$HeartUI.margin_right = -280
+#		$HeartUI.margin_bottom = 52
 	
 func _on_TimerPlayerDeathAnim_timeout():
 	get_tree().change_scene("res://scenes/ui/GameOverScreen.tscn")
@@ -429,8 +429,7 @@ func _debug_stuff():
 
 	#Labels
 	$debuginfo/LFPS.text = str("FPS = ", Engine.get_frames_per_second())
-	$debuginfo/LPlayerPosX.text = str("PlayerX = ", $Player.position.x)
-	$debuginfo/LPlayerPosY.text = str("PlayerY = ", $Player.position.y)
+	$debuginfo/LPlayerPos.text = str("PlayerPosition = ", $Player.position)
 	$debuginfo/LHasItem.text = str("has item = ", Global.has_item)
 	$debuginfo/LCurrentItemID.text = str("current item id = ", Global.current_item_id)
 	$debuginfo/LHPStart.text = str("HP start = ", Global.health_start)

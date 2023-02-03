@@ -22,8 +22,8 @@ func _ready():
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 	
-	$Sprites.position = Vector2(0, -350)
-	$Sprites.scale = Vector2(1.75, 1.75)
+	$Enemy.position.y = -340
+	$Enemy.scale = Vector2(1.75, 1.75)
 	
 	lampplayfieldborder1.position.x = -256
 	lampplayfieldborder2.position.x = 0

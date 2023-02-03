@@ -13,7 +13,7 @@ resource_name = "Death"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites/Lamp:position")
+tracks/0/path = NodePath("Enemy/Lamp:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "values": [ Vector2( 5.125, -11.367 ), Vector2( 11.364, 8.639 ), Vector2( -6.886, -15.168 ), Vector2( -10.09, 6.97 ), Vector2( -7.72, 11.109 ), Vector2( 5.125, -11.367 ), Vector2( 11.364, 8.639 ), Vector2( -6.886, -15.168 ), Vector2( -10.09, 6.97 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprites/Lamp:material:shader_param/saturation")
+tracks/1/path = NodePath("Enemy/Lamp:material:shader_param/saturation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -41,7 +41,7 @@ tracks/1/keys = {
 resource_name = "Idle"
 length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites/Lamp:position")
+tracks/0/path = NodePath("Enemy/Lamp:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -56,7 +56,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites/Lamp:position")
+tracks/0/path = NodePath("Enemy/Lamp:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -68,35 +68,36 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[node name="Boss01Lamp" type="Node2D" groups=["Enemy"]]
+[node name="Boss01Lamp" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 6 )
 
-[node name="Sprites" type="Node2D" parent="."]
+[node name="Enemy" type="Node2D" parent="." groups=["Enemy"]]
 position = Vector2( 0, -350 )
 
-[node name="Lamp" type="Sprite" parent="Sprites"]
+[node name="Lamp" type="Sprite" parent="Enemy"]
 material = ExtResource( 1 )
 scale = Vector2( 1.01563, 1 )
 texture = ExtResource( 3 )
 
-[node name="Body" type="Sprite" parent="Sprites"]
+[node name="Body" type="Sprite" parent="Enemy"]
 material = ExtResource( 1 )
 scale = Vector2( 1.01563, 1 )
 texture = ExtResource( 2 )
 
-[node name="HandLeft" type="Sprite" parent="Sprites"]
+[node name="HandLeft" type="Sprite" parent="Enemy"]
 material = ExtResource( 1 )
 scale = Vector2( 1.01563, 1 )
 texture = ExtResource( 4 )
 
-[node name="HandRight" type="Sprite" parent="Sprites"]
+[node name="HandRight" type="Sprite" parent="Enemy"]
 material = ExtResource( 1 )
 scale = Vector2( 1.01563, 1 )
 texture = ExtResource( 5 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
 pause_mode = 2
+root_node = NodePath("../..")
 anims/Death = SubResource( 3 )
 anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 1 )

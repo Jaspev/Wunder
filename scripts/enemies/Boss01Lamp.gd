@@ -18,7 +18,7 @@ var rngatkvert3 = [201, 256, 311]
 var rngatkhoriz = [-55, 0, 55]
 
 func _ready():
-	$AnimationPlayer.play("Idle")
+	$Enemy/AnimationPlayer.play("Idle")
 	Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
 	Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
 	
@@ -311,6 +311,6 @@ func _ready():
 	
 	yield(get_tree().create_timer(1),"timeout")
 
-func _on_TimerAttack_timeout():
-	$AnimationPlayer.queue("Death")
-	$AnimationPlayer.queue("RESET")
+#func _on_TimerAttack_timeout():
+#	$Enemy/AnimationPlayer.queue("Death")
+#	$Enemy/AnimationPlayer.queue("RESET")

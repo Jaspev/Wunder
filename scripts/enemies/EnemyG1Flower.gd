@@ -67,8 +67,7 @@ func _on_ShootTimer_timeout() -> void:
 	#spawn bullets on rotater on ShootTimer timeout
 	for s in rotater.get_children():
 		var bullet = bulletpetal_scene.instance()
-#		get_tree().root.add_child(bullet)
-		add_child(bullet)
+		get_tree().root.add_child(bullet)
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation
 

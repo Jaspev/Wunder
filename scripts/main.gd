@@ -134,11 +134,12 @@ func _on_TimerPause_timeout():
 	
 	if "Flower" in str(timeline[timeline_id].instance()):
 		flower_encountered = 1
-#		add_child(player)
-#		add_child(border)
-#	elif flower_encountered == 1:
-#		flower_encountered = 2
-#		player.queue_free()
+		add_child(player)
+		add_child(border)
+	elif flower_encountered == 1:
+		flower_encountered = 2
+		player.queue_free()
+		border.queue_free()
 	
 	if "Lamp" in str(timeline[timeline_id].instance()):
 		lamp_encountered = 1
@@ -162,8 +163,6 @@ func _on_TimerPause_timeout():
 		
 	elif lamp_encountered == 1:
 		lamp_encountered = 2
-		
-		border.position.x = 0
 		
 		$EnemyProgress.margin_left = -268
 		$EnemyProgress.margin_top = 288

@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/shaders/desaturation.tres" type="Material" id=1]
 [ext_resource path="res://textures/dev/_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/Border.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Death"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Enemy/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 5.125, -11.367 ), Vector2( 11.364, 8.639 ), Vector2( -6.886, -15.168 ), Vector2( -10.09, 6.97 ), Vector2( -7.72, 11.109 ), Vector2( 5.125, -11.367 ), Vector2( 11.364, 8.639 ), Vector2( -6.886, -15.168 ), Vector2( -10.09, 6.97 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material:shader_param/saturation")
+tracks/1/path = NodePath("Enemy/Sprite:material:shader_param/saturation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -36,7 +38,7 @@ tracks/1/keys = {
 resource_name = "Idle"
 length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Enemy/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -51,7 +53,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Enemy/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -66,13 +68,24 @@ tracks/0/keys = {
 [node name="EnemyDefault" type="Node2D" groups=["Enemy"]]
 pause_mode = 1
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2( 0, -350 )
+
+[node name="Label" type="Label" parent="Enemy"]
+margin_left = -48.0
+margin_top = 40.0
+margin_right = 45.0
+margin_bottom = 54.0
+text = "Default Enemy"
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
 material = ExtResource( 1 )
 scale = Vector2( 1.01563, 1 )
 texture = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
 pause_mode = 2
+root_node = NodePath("../..")
 anims/Death = SubResource( 3 )
 anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 1 )
@@ -81,9 +94,6 @@ anims/RESET = SubResource( 1 )
 autoplay = true
 bus = "Music"
 
-[node name="Label" type="Label" parent="."]
-margin_left = -48.0
-margin_top = 40.0
-margin_right = 45.0
-margin_bottom = 54.0
-text = "Default Enemy"
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="Border" parent="." instance=ExtResource( 4 )]

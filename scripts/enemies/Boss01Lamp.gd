@@ -331,42 +331,56 @@ func _ready():
 	remove_child(atkvert3)
 	
 	# attack 3
-	yield(get_tree().create_timer(1),"timeout")
+	var attacks = 30
+	while attacks > 0:
+		randomize()
+		var randvert1 = rngatkvert1[randi() % rngatkvert1.size()]
+		var randvert2 = rngatkvert2[randi() % rngatkvert2.size()]
+		var randvert3 = rngatkvert3[randi() % rngatkvert3.size()]
+		var randhoriz1 = rngatkhoriz[randi() % rngatkhoriz.size()]
+		var randhoriz2 = rngatkhoriz[randi() % rngatkhoriz.size()]
+		
+		yield(get_tree().create_timer(1),"timeout")
+		
+		atkvertwarn1.position.x = randvert1
+		atkvertwarn2.position.x = randvert2
+		atkvertwarn3.position.x = randvert3
+		atkhorizwarn1.position.y = randhoriz1
+		atkhorizwarn2.position.y = randhoriz2
+		atkvert1.position.x = randvert1
+		atkvert2.position.x = randvert2
+		atkvert3.position.x = randvert3
+		atkhoriz1.position.y = randhoriz1
+		atkhoriz2.position.y = randhoriz2
+		add_child(atkvertwarn1)
+		add_child(atkvertwarn2)
+		add_child(atkvertwarn3)
+		add_child(atkhorizwarn1)
+		add_child(atkhorizwarn2)
+		
+		yield(get_tree().create_timer(1),"timeout")
+		
+		remove_child(atkvertwarn1)
+		remove_child(atkvertwarn2)
+		remove_child(atkvertwarn3)
+		remove_child(atkhorizwarn1)
+		remove_child(atkhorizwarn2)
+		add_child(atkvert1)
+		add_child(atkvert2)
+		add_child(atkvert3)
+		add_child(atkhoriz1)
+		add_child(atkhoriz2)
+		
+		yield(get_tree().create_timer(1),"timeout")
+		
+		remove_child(atkvert1)
+		remove_child(atkvert2)
+		remove_child(atkvert3)
+		remove_child(atkhoriz1)
+		remove_child(atkhoriz2)
+		
+		attacks -= 1
 
-	var randvert1 = rngatkvert1[randi() % rngatkvert1.size()]
-	var randvert2 = rngatkvert2[randi() % rngatkvert2.size()]
-	var randvert3 = rngatkvert3[randi() % rngatkvert3.size()]
-	var randhoriz1 = rngatkhoriz[randi() % rngatkhoriz.size()]
-	var randhoriz2 = rngatkhoriz[randi() % rngatkhoriz.size()]
-	atkvertwarn1.position.x = randvert1
-	atkvertwarn2.position.x = randvert2
-	atkvertwarn3.position.x = randvert3
-	atkvert1.position.x = randvert1
-	atkvert2.position.x = randvert2
-	atkvert3.position.x = randvert3
-	atkhoriz1.position.y = randhoriz1
-	atkhoriz1.position.y = randhoriz2
-	add_child(atkvertwarn1)
-	add_child(atkvertwarn2)
-	add_child(atkvertwarn3)
-	
-	yield(get_tree().create_timer(1),"timeout")
-	
-	remove_child(atkvert1)
-	remove_child(atkvert2)
-	remove_child(atkvert3)
-	add_child(atkvert1)
-	add_child(atkvert2)
-	add_child(atkvert3)
-
-	yield(get_tree().create_timer(1),"timeout")
-
-	remove_child(atkvert1)
-	remove_child(atkvert2)
-	remove_child(atkvert3)
-
-	yield(get_tree().create_timer(1),"timeout")
-
-func _on_TimerAttack_timeout():
-	$Enemy/AnimationPlayer.queue("Death")
-	$Enemy/AnimationPlayer.queue("RESET")
+#func _on_TimerAttack_timeout():
+#	$Enemy/AnimationPlayer.queue("Death")
+#	$Enemy/AnimationPlayer.queue("RESET")

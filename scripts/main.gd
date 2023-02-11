@@ -144,8 +144,6 @@ func _on_TimerPause_timeout():
 	if "Lamp" in str(timeline[timeline_id].instance()):
 		lamp_encountered = 1
 		
-#		border.position.x = 999
-		
 		$EnemyProgress.margin_left = -365
 		$EnemyProgress.margin_top = 128
 		$EnemyProgress.margin_right = 365

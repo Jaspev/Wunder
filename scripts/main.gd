@@ -112,6 +112,7 @@ func _on_TimerDeathAnim_timeout():
 	#reset everything for next enemy
 	get_tree().call_group("Enemy", "queue_free")
 	get_tree().call_group("Bullet", "queue_free")
+	get_tree().call_group("Beam", "queue_free")
 
 func _on_TimerPause_timeout():
 	add_child(timeline[timeline_id].instance()) #summon next thing in timeline

@@ -19,7 +19,7 @@ func _physics_process(delta):
 		move_and_slide(move_vec * Global.move_speed * delta)
 
 func _on_Area2D_area_entered(area):
-	if area.is_in_group("Bullet") and $iframes.is_stopped():
+	if area.is_in_group("Bullet") and $iframes.is_stopped() or area.is_in_group("Beam") and $iframes.is_stopped():
 		Global.health -= 1
 		$iframes.start()
 		$AnimationPlayer.queue("flash")

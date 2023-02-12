@@ -331,7 +331,8 @@ func _ready():
 	remove_child(atkvert3)
 	
 	# attack 3
-	var attacks = 30
+	var attacks = 20
+	var wait_time = 1
 	while attacks > 0:
 		randomize()
 		var randvert1 = rngatkvert1[randi() % rngatkvert1.size()]
@@ -340,7 +341,7 @@ func _ready():
 		var randhoriz1 = rngatkhoriz[randi() % rngatkhoriz.size()]
 		var randhoriz2 = rngatkhoriz[randi() % rngatkhoriz.size()]
 		
-		yield(get_tree().create_timer(1),"timeout")
+		yield(get_tree().create_timer(wait_time / 2),"timeout")
 		
 		atkvertwarn1.position.x = randvert1
 		atkvertwarn2.position.x = randvert2
@@ -358,7 +359,7 @@ func _ready():
 		add_child(atkhorizwarn1)
 		add_child(atkhorizwarn2)
 		
-		yield(get_tree().create_timer(1),"timeout")
+		yield(get_tree().create_timer(wait_time),"timeout")
 		
 		remove_child(atkvertwarn1)
 		remove_child(atkvertwarn2)
@@ -371,7 +372,7 @@ func _ready():
 		add_child(atkhoriz1)
 		add_child(atkhoriz2)
 		
-		yield(get_tree().create_timer(1),"timeout")
+		yield(get_tree().create_timer(wait_time / 4),"timeout")
 		
 		remove_child(atkvert1)
 		remove_child(atkvert2)
@@ -379,6 +380,7 @@ func _ready():
 		remove_child(atkhoriz1)
 		remove_child(atkhoriz2)
 		
+		wait_time -= 0.01
 		attacks -= 1
 
 #func _on_TimerAttack_timeout():

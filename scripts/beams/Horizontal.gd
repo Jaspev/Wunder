@@ -1,16 +1,15 @@
 extends Node2D
 
+onready var warning = $Warning
+onready var attack = $Attack
+onready var collision = $CollisionShape2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var wait_time = 1
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	yield(get_tree().create_timer(wait_time),"timeout")
+	warning.position.x = 9999
+	attack.position.x = 0
+	collision.position.x = 0
+	yield(get_tree().create_timer(wait_time),"timeout")
+	queue_free()

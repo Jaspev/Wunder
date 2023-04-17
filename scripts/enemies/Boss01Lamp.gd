@@ -1,5 +1,7 @@
 extends Node2D
 
+var test = load("res://scenes/beams/Test.tscn")
+
 var lampplayfieldborder1 = preload("res://scenes/ui/BorderSmall.tscn").instance()
 var lampplayfieldborder2 = preload("res://scenes/ui/BorderSmall.tscn").instance()
 var lampplayfieldborder3 = preload("res://scenes/ui/BorderSmall.tscn").instance()
@@ -69,6 +71,7 @@ func _ready():
 	var posbot = Vector2(0, -256)
 	var postop = Vector2(0, 256)
 	
+	#playfield border shuffle animation
 	var passes = 30
 	while passes > 0:
 		var playerborderpos = $Player.position.x
@@ -269,51 +272,59 @@ func _ready():
 		
 		passes -= 1
 	
+	new_attacks()
+	
+func new_attacks():
+	yield(get_tree().create_timer(1),"timeout")
+	var yessir = test.instance()
+	add_child(yessir)
+
+func old_attacks():
 	# attack 1
 	# warning
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	atkvertwarn1.position.x = -311
 	atkvertwarn2.position.x = -55
 	atkvertwarn3.position.x = 201
 	add_child(atkvertwarn1)
 	add_child(atkvertwarn2)
 	add_child(atkvertwarn3)
-	
+
 	# hit
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	remove_child(atkvertwarn1)
 	remove_child(atkvertwarn2)
 	remove_child(atkvertwarn3)
-	
+
 	atkvert1.position.x = -311
 	atkvert2.position.x = -55
 	atkvert3.position.x = 201
 	add_child(atkvert1)
 	add_child(atkvert2)
 	add_child(atkvert3)
-	
+
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	remove_child(atkvert1)
 	remove_child(atkvert2)
 	remove_child(atkvert3)
-	
+
 	# attack 2
 	# warning
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	atkvertwarn1.position.x = -201
 	atkvertwarn2.position.x = 0
 	atkvertwarn3.position.x = 311
 	add_child(atkvertwarn1)
 	add_child(atkvertwarn2)
 	add_child(atkvertwarn3)
-	
+
 	# hit
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	remove_child(atkvertwarn1)
 	remove_child(atkvertwarn2)
 	remove_child(atkvertwarn3)
@@ -323,13 +334,13 @@ func _ready():
 	add_child(atkvert1)
 	add_child(atkvert2)
 	add_child(atkvert3)
-	
+
 	yield(get_tree().create_timer(1),"timeout")
-	
+
 	remove_child(atkvert1)
 	remove_child(atkvert2)
 	remove_child(atkvert3)
-	
+
 	# attack 3
 	var attacks = 20
 	var wait_time = 1
@@ -340,9 +351,9 @@ func _ready():
 		var randvert3 = rngatkvert3[randi() % rngatkvert3.size()]
 		var randhoriz1 = rngatkhoriz[randi() % rngatkhoriz.size()]
 		var randhoriz2 = rngatkhoriz[randi() % rngatkhoriz.size()]
-		
+
 		yield(get_tree().create_timer(wait_time / 2),"timeout")
-		
+
 		atkvertwarn1.position.x = randvert1
 		atkvertwarn2.position.x = randvert2
 		atkvertwarn3.position.x = randvert3
@@ -358,9 +369,9 @@ func _ready():
 		add_child(atkvertwarn3)
 		add_child(atkhorizwarn1)
 		add_child(atkhorizwarn2)
-		
+
 		yield(get_tree().create_timer(wait_time),"timeout")
-		
+
 		remove_child(atkvertwarn1)
 		remove_child(atkvertwarn2)
 		remove_child(atkvertwarn3)
@@ -371,18 +382,18 @@ func _ready():
 		add_child(atkvert3)
 		add_child(atkhoriz1)
 		add_child(atkhoriz2)
-		
+
 		yield(get_tree().create_timer(wait_time / 4),"timeout")
-		
+
 		remove_child(atkvert1)
 		remove_child(atkvert2)
 		remove_child(atkvert3)
 		remove_child(atkhoriz1)
 		remove_child(atkhoriz2)
-		
+
 		wait_time -= 0.01
 		attacks -= 1
 
-#func _on_TimerAttack_timeout():
-#	$Enemy/AnimationPlayer.queue("Death")
-#	$Enemy/AnimationPlayer.queue("RESET")
+func _on_TimerAttack_timeout():
+	$Enemy/AnimationPlayer.queue("Death")
+	$Enemy/AnimationPlayer.queue("RESET")

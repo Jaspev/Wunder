@@ -1,0 +1,26 @@
+ENEMY / BOSS TREE:
+	Node2D (Group: "Enemy", script attached)
+		Sprite / AnimatedSprite
+			desaturation shader
+		AnimationPlayer (Pause Mode = Process)
+			RESET
+			Death
+			Idle
+		AudioStreamPlayer (autoplay enabled)
+		Label (Temp, says enemy name until a unique sprite replaces it)
+
+	Node2D script:
+		func _ready():
+			$AnimationPlayer.play("Idle")
+			Global.TimerAttack.connect("timeout", self, "_on_TimerAttack_timeout")
+			Global.TimerDeathAnim.connect("timeout", self, "_on_TimerDeathAnim_timeout")
+			
+			self.position = Vector2(0, -350)
+			
+		func _on_TimerAttack_timeout():
+			$AnimationPlayer.queue("Death")
+			$AnimationPlayer.queue("RESET")
+			
+		func _on_TimerDeathAnim_timeout():
+			pass
+			#play reset animation but it's not working here ????

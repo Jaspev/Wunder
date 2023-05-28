@@ -1,0 +1,51 @@
+passive items:
+	+1 hp / +2 hp / max hp / increase max hp by X amount / binding of isaac ghost hearts / etc. (these would heal you right when you buy them)
+	increase move speed
+	increase amount of invincibility frames
+	smaller player size
+	faster enemy timer
+	shield (circle around you that protects you from one hit then breaks / circle around you that works like ssbm where after a few hits it breaks but can regen (op) / just a line above you or you can control which side of you it goes on (takes more hits to break than the circle) / etc.)
+
+use items: 
+	dash / teleport
+	healing items
+	thing that makes you invincible for a limited time on use
+	bomb or something that sends out radius that erases projectiles around you
+	press key during enemy attack to skip it ($Timer.stop()) (can't skip bosses, something should happen if you use it during a boss though)
+	
+joke / misc items:
+	item that does seemingly nothing until you encounter certain boss and use the item then something special happens (final boss or something has undogeable attack that you need this item to dodge it / teddy bear item that you can give to really mean looking enemy and it'll let you skip their fight / etc.)
+	mimic item (like something that looks really really good but costs like 1 point to buy then when you buy it, it hurts you or something)
+	really impossibly expensive item that costs like 99999 that does nothing or is annoying in some way (thing that follows you around and gets in your way / thing that makes annoying sounds every time you move / etc.)
+	LITERALLY impossibly expensive item that costs like Ωe+Ω that crashes your game and permanently softlocks you or something because you'd have to cheat to get it
+	Item that crashes your game (needs sprite and name that make it obvious that it will crash your game)
+		Crash item dialogue first use:
+			"Are you sure you want to use this? It will literally crash your game. [yes] [no]"
+				if no:
+					close dialogue box
+				if yes
+					"Really? Like you get nothing for using this item, your game just crashes. [yes] [no]"
+						if no:
+							close dialogue box
+						if yes:
+							"I don't think you understand, this item just will close the game. You will lose all your progress on this run. Are you sure you want to crash your game? [yes] [no]"
+								if no:
+									close dialogue box
+								if yes:
+									"Alright whatever, it's your life ig. [crash my game] [no]"
+										if crash my game:
+											crash game
+										if no:
+											"No no no, there's no going back. You said you wanted your game to crash four times now and your just now changing your mind? [yes] [no]"
+												if yes:
+												if no:
+pending ideas:
+	refrences to other games/stuff like a binding of isaac item
+	godskin
+	0 A Battery
+	meguple A Battery
+	the coolest thing
+	underwear (cause of original title of game)
+	cheesy gordita crunch
+
+do we have item descriptions? not bad game design if we don't, binding of isaac doesn't have item descriptions, but item icons need to be clear and game needs to encourage players to buy new items

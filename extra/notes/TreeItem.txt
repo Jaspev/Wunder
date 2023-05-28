@@ -1,0 +1,17 @@
+ITEM TREE:
+	Area2D (script attached)
+		Sprite
+		CollisionShape2D
+		Label
+
+	Area2D script:
+		var cost = 20
+
+		func _ready():
+			self.connect("body_entered", self, "_on_(NameOfItem)_body_entered")
+
+		func _on_(NameOfItem)_body_entered(body):
+			if Global.score >= cost:
+				#item's function goes here (if Input.is_action_just_pressed("use_item"):)
+				Global.score -= cost
+				queue_free()

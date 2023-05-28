@@ -1,0 +1,50 @@
+bugs:
+	player can still move after door starts to close
+		cause player is now in enemy scenes not main
+	everything about the items
+	when on death screen and press quit, doors automatically close on title screen (sometimes??)
+	skip item can skip bosses
+	if you change settings, they don't save
+		solution: save file? Put options vars in global script
+	if door transition is interrupted it looks jank
+	
+optimizations:
+	you can just stay in the top right of the flower attack and won't get hit
+	replace some functions with func _Input() where it is needed
+	rework usable items so they're not all just in the Global script
+	figure out why player movement is stuttering sometimes??
+	
+additions:
+	enemies:
+		Eye guy attack
+		Ghost magician attack
+	save file:
+		save options menu changes
+	debug menu stuff:
+		activate _debug_stuff() func by typing "debug" or something in main menu
+		on start menu, button that shows all enemies, click which enemy you want to load
+			or: make command line https://youtu.be/xhZ3FWUkhKY
+	difficulty selection:
+		like osu mod selector: double enemy, smaller playfield, 1hp, half player speed, flashlight, double enemy speed, player is 2x size, etc.
+	door close animation on player death
+	add door close animation to game over screen when you press restart
+	different door close/open animations and textures for boss/enemy/shop
+	enemies have multiple attacks that are randomly selected (bosses attacks are the same every time)
+
+revisions:
+	rework how items work
+		Currently:
+			it stores all item scripts in the global script and assigns a number to those scripts. When the player buys an Item, it just gives that item's number to the player.
+		Should be: 
+			Item scripts and id in the item somehow, for organization.
+
+!!!more items / enemies!!!
+file://C:\Users\Jacks\Desktop\wunder\xtra\enemy_ideas.txt
+file://C:\Users\Jacks\Desktop\wunder\xtra\item_ideas.txt
+
+when game is finished:
+	throw all textures in https://tinypng.com/
+	upload soundtrack to bandcamp
+	check if website has correct info + if all links work properly
+	itch.io page has custom banner/pic with trailer (banner can be animated)
+	upload game to itch.io

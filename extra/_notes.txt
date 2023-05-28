@@ -1,0 +1,21 @@
+Overall Godot cheat sheet: 	https://github.com/tutrinh/Godot_Cheat_Sheet
+Enemy/boss tree:			file://C:\Users\Jacks\Desktop\wunder\xtra\notes\TreeEnemyBoss.txt
+Item tree:					file://C:\Users\Jacks\Desktop\wunder\xtra\notes\TreeEnemyBoss.txt
+Tween cheat sheet:			file://C:\Users\Jacks\Desktop\wunder\xtra\notes\TweenCheatSheet.txt
+
+func _ready()
+	runs right when the script is loaded
+
+func _input() / input(event)
+	runs when input detected
+
+get node from other scene:
+	var instanced_scene = preload("file system path of scene with wanted node").instance()
+	var node = instanced_scene.get_node("wanted node")
+	(basically duplicates the scene so not very useful)
+
+create node in code: (label node for example)
+	func _ready():
+		var my_new_label = Label.new()
+		my_new_label.text = "hello world"	#node properties before add_child
+		add_child(my_new_label)

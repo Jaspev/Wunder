@@ -1,0 +1,49 @@
+var the_name_of_the_tween_node = Tween.new()
+
+the_name_of_the_tween_node.interpolate_property(
+	$node_with_property_you_want_to_animate,
+	"name_of_property",
+	starting_keyframe,
+	ending_keyframe,
+	time_in_seconds,
+	Tween.transition_type,
+	Tween.easing_mode
+)
+
+add_child(the_name_of_the_tween_node)
+
+the_name_of_the_tween_node.start()
+
+4.0 ------------------------------------------------------------------------------------------------
+
+var name_of_tween_node = create_tween().set_trans(Tween.transition_type).set_ease(Tween.ease_mode)
+
+name_of_tween_node.tween_property(
+	$node_with_property_you_want_to_animate,
+	"name_of_property",
+	ending_keyframe,
+	time_in_seconds
+)
+
+----------------------------------------------------------------------------------------------------
+
+transition types:
+	TRANS_LINEAR	The animation is interpolated linearly.
+	TRANS_SINE		The animation is interpolated using a sine function.
+	TRANS_QUINT		The animation is interpolated with a quintic (to the power of 5) function.
+	TRANS_QUART		The animation is interpolated with a quartic (to the power of 4) function.
+	TRANS_QUAD		The animation is interpolated with a quadratic (to the power of 2) function.
+	TRANS_EXPO		The animation is interpolated with an exponential (to the power of x) function.
+	TRANS_ELASTIC	The animation is interpolated with elasticity, wiggling around the edges.
+	TRANS_CUBIC		The animation is interpolated with a cubic (to the power of 3) function.
+	TRANS_CIRC		The animation is interpolated with a function using square roots.
+	TRANS_BOUNCE	The animation is interpolated by bouncing at the end.
+	TRANS_BACK		The animation is interpolated backing out at ends.
+
+easing modes:
+	EASE_IN			The interpolation starts slowly and speeds up towards the end.
+	EASE_OUT		The interpolation starts quickly and slows down towards the end.
+	EASE_IN_OUT		A combination of EASE_IN and EASE_OUT. The interpolation is slowest at both ends.
+	EASE_OUT_IN		A combination of EASE_IN and EASE_OUT. The interpolation is fastest at both ends.
+
+https://easings.net/

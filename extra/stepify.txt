@@ -1,0 +1,2 @@
+stepify(val,step)
+stepify(100,32) returns 96.0

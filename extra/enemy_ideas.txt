@@ -1,0 +1,41 @@
+Original:
+	tetris guy whos attack is just filling the screen with tetronimos
+	chess guy whos attack is you're on a chess board and he moves chess peices like they'd be moved in a normal chess game but he just moves them to where you are
+	pong enemy where you dodge ping pong ball and 4 paddles (one on top, left, right, bottom) (you don't play pong but you just dodge 4 AIs playing pong)
+	komradekat
+	magician guy who rearranges playfield like ball cup trick thing
+	metronome guy attacks hit on metronome bpm
+	big armor guy but when they die the armor breaks away and it's a tiny guy
+	some kind of illusion guy that uses an optical illusion in their design
+
+Refrences:
+	some character from undertale (could be the dog) or some character that is a refrence to undertale (character named arial that's a mermaid skeleton)
+	some character that is a refrence to wario ware / attack that's a refrence from wario ware (fly)
+	electro specre whos attacks mimic his attacks in earthbound
+	gmod refrence
+	roblox refrence (original guest playermodel)
+	serial experiments lain refrence (powerline)
+	Mom from Binding of Isaac or some refrence to Issac/Edmund Mcmillen
+	Godot logo or some refrence to Godot
+
+Meme:
+	michael (racist person)
+	adriel (mexican person (also racist))
+	bald elon musk
+	ghostbuster of stratford
+	moai
+
+Attack ideas:
+	doesn't attack you but attacks your hp directly and you have to do minigame to distract them / keep them from attacking your hp
+	interacts with ui in some way (freezes the timer at the bottom / throws your hearts at you / erases your points if you get hit / etc.)
+	attack that is two walls on left and right and both walls move left and right at same time
+	enemy dashes at player, leaves trail of non-moving circles. Player will have to dodge the enemy dashing at them, then dodge the trail the enemy leaves.
+	something like player leaves trail and if player hits own trail then they take damage (like snake)
+	
+Seasonal (only appears on their holiday):
+	Christmas:		Santa / Krampus (santa appears in the morning, krampus appears at night)
+	Easter:			Easter Bunny
+	Valentines:		Cupid
+	St. Patrick's:	Leprechaun
+	Thanksgiving:	Turkey
+	Halloween:		Sans

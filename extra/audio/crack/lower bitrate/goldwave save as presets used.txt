@@ -1,0 +1,2 @@
+crack1low.wav	:	GSM 6.10 11.025 kHz, Mono, 18 kbps
+crack1low2.wav	:	GSM 6.10 8.000 kHz, Mono, 13 kbps
